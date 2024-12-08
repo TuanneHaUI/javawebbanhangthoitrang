@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Admin/Product</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assetsquantri/img/favicon.png" rel="icon">
+  <link href="assetsquantri/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assetsquantri/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assetsquantri/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assetsquantri/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="logo d-flex align-items-center">
+        <img src="assetsquantri/img/logo.png" alt="">
+        <span class="d-none d-lg-block">T3admin</span>
+      </div>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+   
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+			<i class="bi bi-person-circle" ></i>
+            <span class="d-none d-md-block dropdown-toggle ps-2">Nguyễn Hoàng Tùng</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Tung123</h6>
+              <span>Quản trị viên</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>Đổi mật khẩu</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Đăng xuất</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+     
+	  <li class="nav-heading">Quản lý bán hàng</li>
+	  <li class="nav-item">
+        <a class="nav-link collapsed" href="Category.html">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Danh mục</span>
+        </a>
+      </li>
+	  <li class="nav-item">
+        <a class="nav-link " href="product.html">
+          <i class="bi bi-grid"></i>
+          <span>Sản phẩm</span>
+        </a>
+      </li>
+
+      <li class="nav-heading">Quản lý tài khoản</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="account.html">
+          <i class="bi bi-person"></i>
+          <span>Tài khoản</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="group.html">
+          <i class="bi bi-question-circle"></i>
+          <span>Phân quyền</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Sản phẩm</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Quản lý bán hàng</a></li>
+          <li class="breadcrumb-item active">Sản phẩm</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+		
+          <div class="card">
+            <div class="card-body">
+              <h3 class="card-title"><b>Quản lý sản phẩm</b></h3>
+			  <div style="display: flex; justify-content: flex-start; padding-left: 20px;">
+				<div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+					<button type="button" id="addb" class="btn btn-success" ><i class="bi bi-plus-lg"></i></button>
+					<p> Thêm sản phẩm</p>
+				</div>
+			  </div>
+			  <div class="card">
+              <div class="card-body row hide" id="addf" >
+              <h5 class="card-title">Thêm sản phẩm</h5>
+
+              <!-- Vertical Form -->
+              <form>
+                <div class="col-12">
+                 <label for="inputName" class="form-label">Tên sản phẩm</label>
+                 <input type="text" class="form-control" id="inputName" placeholder="Tên sản phẩm">
+				 <label for="categorySelect" class="form-label">Chọn danh mục của sản phẩm</label>
+				 <select class="form-select" id="categorySelect">
+					<option selected>Chọn danh mục...</option>				 
+					<option value="1">Quần áo nam</option>
+					<option value="2">Quần áo nữ</option>
+					<option value="3">Phụ kiện</option>
+					<option value="4">Giày dép</option>
+					<option value="5">Túi xách</option>
+				 </select>
+				 <label for="inputPrice" class="form-label">Đơn giá</label>
+				 <input type="number" class="form-control" id="inputPrice" placeholder="Đơn vị: $">
+				 <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+					<label for="inputImg">Ảnh:</label><br>
+					<input type="file" id="inputImg" name="image" accept="image/*" required>		
+				</form><br>
+				<label for="inputDetail" class="form-label">Mô tả</label>
+				 <input class="form-control" id="inputDetail" placeholder="Mô tả sản phẩm">
+				 <label class="form-label">Kiểu dáng:</label>
+				 
+            <div class="card-body">
+
+
+              <!-- Table with hoverable rows -->
+              <table class="table table-hover" id="recordsTable" >
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Màu sắc</th>
+                    <th scope="col">Kích cỡ</th>
+                    <th scope="col">Số lượng</th>
+               
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td >Chưa có kiểu dáng nào được thêm</td>
+                  </tr>
+                </tbody>
+              </table>
+				 <button type="button" id="adds" class="btn btn-success" >+</button>
+				 <label class="form-label">thêm Kiểu dáng:</label>
+				 <form id="inputForm">
+				  <div class="card">
+				  <div class="card-body row hide" id="addstyle">
+				 <label for="inputColor" class="form-label">Màu sắc</label>
+				 <input type="text" class="form-control" id="inputColor" placeholder="Nhập màu sắc">
+				 
+				 <label for="inputSize" class="form-label">Kích cỡ</label>
+				 <select class="form-select" id="inputSize">
+					<option selected>Chọn kích cỡ...</option>				 
+					<option value="S">S</option>
+					<option value="M">M</option>
+					<option value="L">L</option>
+					<option value="XL">XL</option>
+					<option value="XXL">XXL</option>
+					<option value="3XL">3XL</option>
+				 </select>
+				 
+				 <label for="inputQuantity" class="form-label">Số lượng</label>
+				 <input type="number" class="form-control" id="inputQuantity" placeholder="Nhập số lượng">
+				 
+				<div class="text-center">
+                  <button  type="button" id="submitButton" class="btn btn-primary">Thêm kiểu</button>
+                </div>
+              </div>
+          </div>
+				</form>
+				
+				</div>
+				
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Thêm</button>
+                  </div>
+               
+              </form><!-- Vertical Form -->
+             </div>
+            </div>
+          </div>
+              <!-- Table with stripped rows -->
+              </div>
+			  <table class="table datatable">
+                <thead>
+                  <tr>
+                    <th>Mã SP</th>
+                    <th>Tên SP</th>
+                    <th>Hình ảnh</th>
+                    <th>Số lượng</th>
+                    <th>Phân loại</th>
+                    <th>Giá</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>01</td>
+                    <td>Esprit Ruffle Shirt</td>
+                    <td><img src="assetsquantri/img/product-01.jpg" alt="Esprit Ruffle Shirt" style="width: 100px; height: auto;"></td>
+                    <td>28</td>
+                    <td>Quần áo nữ</td>
+                    <td>$16.64</td>
+                    <td>
+					<form>
+					<button type="button" class="btn btn-outline-warning" id="editB" >Sửa</button>
+					<button class="btn btn-outline-danger">Xoá</button><br>
+					<button type="button" class="btn btn-outline-info" id="detailB" style="margin-top: 4px;">Chi tiết</button>
+					</form>
+					</td>
+                  </tr>
+                  <tr>
+                    <td>02</td>
+                    <td>Herschel supply</td>
+                    <td><img src="assetsquantri/img/product-02.jpg" alt="Herschel supply" style="width: 100px; height: auto;"></td>
+                    <td>35</td>
+                    <td>Quần áo nữ</td>
+                    <td>$35.31</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+                  <tr>
+                    <td>03</td>
+                    <td>Only Check Trouser</td>
+                    <td><img src="assetsquantri/img/product-03.jpg" alt="Only Check Trouser" style="width: 100px; height: auto;"></td>
+                    <td>45</td>
+                    <td>Quần áo nam</td>
+                    <td>$25.50</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+                  <tr>
+                    <td>04</td>
+                    <td>Classic Trench Coat</td>
+                    <td><img src="assetsquantri/img/product-04.jpg" alt="Classic Trench Coat" style="width: 100px; height: auto;"></td>
+                    <td>34</td>
+                    <td>Quần áo nữ</td>
+                    <td>$75.00</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+                  <tr>
+                    <td>05</td>
+                    <td>Front Pocket Jumper</td>
+                    <td><img src="assetsquantri/img/product-05.jpg" alt="Front Pocket Jumper" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$34.75</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  
+				  <tr>
+                    <td>06</td>
+                    <td>Vintage Inspired Classic</td>
+                    <td><img src="assetsquantri/img/product-06.jpg" alt="Vintage Inspired Classic" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Đồng hồ</td>
+                    <td>$93.20</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>07</td>
+                    <td>Shirt in Stretch Cotton</td>
+                    <td><img src="assetsquantri/img/product-07.jpg" alt="Shirt in Stretch Cotton" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$52.66</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>08</td>
+                    <td>Pieces Metallic Printed</td>
+                    <td><img src="assetsquantri/img/product-08.jpg" alt="Pieces Metallic Printed" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$18.96</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>09</td>
+                    <td>Converse All Star Hi Plimsolls</td>
+                    <td><img src="assetsquantri/img/product-09.jpg" alt="Converse All Star Hi Plimsolls" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Giày</td>
+                    <td>$75.00</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>10</td>
+                    <td>Femme T-Shirt In Stripe</td>
+                    <td><img src="assetsquantri/img/product-10.jpg" alt="Femme T-Shirt In Stripe" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$25.85</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>11</td>
+                    <td>Herschel supply</td>
+                    <td><img src="assetsquantri/img/product-11.jpg" alt="Herschel supply" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nam</td>
+                    <td>$63.16</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>12</td>
+                    <td>Herschel supply</td>
+                    <td><img src="assetsquantri/img/product-12.jpg" alt="Herschel supply" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Thắt lưng</td>
+                    <td>$63.15</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>13</td>
+                    <td>T-Shirt with Sleeve</td>
+                    <td><img src="assetsquantri/img/product-13.jpg" alt="T-Shirt with Sleeve" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$18.49</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>14</td>
+                    <td>Pretty Little Thing</td>
+                    <td><img src="assetsquantri/img/product-14.jpg" alt="Pretty Little Thing" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$54.79</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>15</td>
+                    <td>Mini Silver Mesh Watch</td>
+                    <td><img src="assetsquantri/img/product-15.jpg" alt="Mini Silver Mesh Watch" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Đồng hồ</td>
+                    <td>$86.85</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+                    <td>16</td>
+                    <td>Square Neck Back</td>
+                    <td><img src="assetsquantri/img/product-16.jpg" alt="Square Neck Back" style="width: 100px; height: auto;"></td>
+                    <td>47</td>
+                    <td>Quần áo nữ</td>
+                    <td>$29.64</td>
+                    <td>
+					<button type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+                </tbody>
+              </table>
+              <!-- End Table with stripped rows -->
+
+            
+          </div>
+			</div>
+    
+    </section>
+	<div class="card editForm hide" id="editF" style="top: 10%; left: 10%;">
+		<div class="card-body row " >
+              <h5 class="card-title" >Sửa sản phẩm </h5>
+
+              <!-- Vertical Form -->
+              <form>
+                <label for="editName" class="form-label">Tên sản phẩm</label>
+                 <input type="text" class="form-control" id="editName" placeholder="Tên sản phẩm">
+				 <label for="categorySelect" class="form-label">Chọn danh mục của sản phẩm</label>
+				 <select class="form-select" id="editCategory">
+					<option selected>Chọn danh mục...</option>				 
+					<option value="1">Quần áo nam</option>
+					<option value="2">Quần áo nữ</option>
+					<option value="3">Phụ kiện</option>
+					<option value="4">Giày dép</option>
+					<option value="5">Túi xách</option>
+				 </select>
+				 <label for="editPrice" class="form-label">Đơn giá</label>
+				 <input type="number" class="form-control" id="editPrice" placeholder="Đơn vị: $">
+				 <form id="editUploadForm" action="/upload" method="post" enctype="multipart/form-data">
+					<label for="editImg">Ảnh:</label><br>
+					<input type="file" id="editImg" name="image" accept="image/*" required>		
+				</form>
+				<label for="editDetail" class="form-label">Mô tả</label>
+				 <input type="number" class="form-control" id="editDetail" placeholder="Mô tả sản phẩm">
+				
+                  <button type="submit" id="cuppha" class="btn btn-primary">Sửa</button>
+              </form>
+                </div>
+
+    </div>
+ 
+	<div class="card detailForm hide" id="detailF">
+		<div class="card-body row "  >
+              <h5 class="card-title">Chi tiết sản phẩm</h5>
+
+              <!-- Vertical Form -->
+              <form >
+                <div class="col-12">
+                  <table class="table datatable">
+                <thead>
+                  <tr>
+					<th>Màu sắc</th>
+                    <th>Kích cỡ</th>                                    
+                    <th>Số lượng</th>
+                    <th>Hành động</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+					<td>Đỏ</td>
+                    <td>XL</td>                    
+                    <td>100</td> 
+                    <td>
+					<button id="editsB" type="button" class="btn btn-outline-warning">Sửa</button>
+					<button type="button" class="btn btn-outline-danger">xoá</button>
+					</td>
+                  </tr>
+				  <tr>
+					<td>01</td>
+                    <td>Mini Silver Mesh Watch</td>                    
+                    <td>$86.85</td> 
+                  </tr>
+				  <tr>
+					<td>01</td>
+                    <td>Mini Silver Mesh Watch</td>                    
+                    <td>$86.85</td> 
+                  </tr>
+				  <tr>
+					<td>01</td>
+                    <td>Mini Silver Mesh Watch</td>                    
+                    <td>$86.85</td> 
+                  </tr>
+				  <tr>
+					<td>01</td>
+                    <td>Mini Silver Mesh Watch</td>                    
+                    <td>$86.85</td> 
+                  </tr>
+				  <tr>
+					<td>01</td>
+                    <td>Mini Silver Mesh Watch</td>                    
+                    <td>$86.85</td> 
+                  </tr>
+				  </tbody>
+              </table>
+                </div>
+              </form><!-- Vertical Form -->
+		</div>
+    </div>
+	<div class="card editForm hide" style="z-index: 2222" id="editS">
+		<div class="card-body row " >
+              <h5 class="card-title" >Sửa kiểu</h5>
+
+              <!-- Vertical Form -->
+              <form>
+                <label for="editColor" class="form-label">Màu sắc</label>
+                 <input type="text" class="form-control" id="editColor" placeholder="Màu sắc">
+				 <label for="inputSize" class="form-label">Kích cỡ</label>
+				 <select class="form-select" id="editSize">
+					<option selected>Chọn kích cỡ...</option>				 
+					<option value="S">S</option>
+					<option value="M">M</option>
+					<option value="L">L</option>
+					<option value="XL">XL</option>
+					<option value="XXL">XXL</option>
+					<option value="3XL">3XL</option>
+				 </select>
+				 <label for="editQuantity" class="form-label">Số lượng</label>
+				 <input type="number" class="form-control" id="editQuantity" placeholder="Số lượng">				 
+				
+                  <button type="submit" class="btn btn-primary">Sửa</button>
+              </form>
+                </div>
+
+    </div>
+      </div>
+  </main><!-- End #main -->
+<div id="smoke" class="smoke hide"></div>
+<div id="smoke2" class="smoke hide" style="z-index: 2221"></div>
+  <!-- ======= Footer ======= -->
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assetsquantri/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assetsquantri/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assetsquantri/vendor/chart.js/chart.umd.js"></script>
+  <script src="assetsquantri/vendor/echarts/echarts.min.js"></script>
+  <script src="assetsquantri/vendor/quill/quill.js"></script>
+  <script src="assetsquantri/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assetsquantri/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assetsquantri/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assetsquantri/js/main.js"></script>
+  <script>
+document.getElementById('addb').addEventListener('click', toggleUpload);
+function toggleUpload() {
+    const addForm = document.getElementById('addf');
+    addForm.classList.toggle('hide');
+}
+
+document.getElementById('adds').addEventListener('click', styleUpload);
+function styleUpload() {
+    const addStyle = document.getElementById('addstyle');
+    addStyle.classList.toggle('hide');
+}
+
+const form = document.getElementById('inputForm');
+const submitButton = document.getElementById('submitButton');
+const tableBody = document.querySelector('#recordsTable tbody');
+
+let records = [];
+const updateTable = () => {
+    tableBody.innerHTML = "";
+    if (records.length === 0) {
+        tableBody.innerHTML = `<tr><td>Chưa có kiểu dáng nào được thêm</td></tr>`;
+        return;
+    }
+    records.forEach((record, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${record.color}</td>
+            <td>${record.size}</td>
+            <td>${record.quantity}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+};
+
+submitButton.addEventListener('click', () => {
+    const color = document.getElementById('inputColor').value.trim();
+    const size = document.getElementById('inputSize').value.trim();
+    const quantity = document.getElementById('inputQuantity').value.trim();
+
+    if (!color || !size || !quantity) {
+        alert("hãy nhập đầy đủ các mục");
+        return;
+    }
+
+    records.push({ color, size, quantity });
+    updateTable();
+    form.reset();
+});
+
+document.getElementById('editB').addEventListener('click', () => {
+    editForm();
+});
+
+function editForm() {
+    const editF = document.getElementById('editF');
+    const smoke = document.getElementById('smoke');
+    editF.classList.remove('hide');
+    smoke.classList.remove('hide');
+}
+
+document.getElementById('detailB').addEventListener('click', () => {
+    detailForm();
+    saveTabState('detailF');
+});
+
+function detailForm() {
+    const detailF = document.getElementById('detailF');
+    const smoke = document.getElementById('smoke');
+    detailF.classList.remove('hide');
+    smoke.classList.remove('hide');
+}
+
+document.getElementById('smoke').addEventListener('click', function () {
+    document.getElementById('smoke').classList.add('hide');
+    document.getElementById('editF').classList.add('hide');
+    document.getElementById('detailF').classList.add('hide');
+    saveTabState('');
+});
+
+document.getElementById('editsB').addEventListener('click', () => {
+    editsForm();
+});
+
+function editsForm() {
+    const editS = document.getElementById('editS');
+    const smoke = document.getElementById('smoke2');
+    editS.classList.remove('hide');
+    smoke2.classList.remove('hide');
+}
+document.getElementById('smoke2').addEventListener('click', function () {
+    document.getElementById('smoke2').classList.add('hide');
+    document.getElementById('editS').classList.add('hide');
+    saveTabState('');
+});
+
+// Lưu trạng thái tab vào Local Storage
+function saveTabState(tabId) {
+    localStorage.setItem('activeTab', tabId);
+}
+
+// Khôi phục trạng thái tab khi load lại trang
+window.addEventListener('load', () => {
+    const activeTab = localStorage.getItem('activeTab');
+    if (activeTab) {
+        document.getElementById(activeTab)?.classList.remove('hide');
+        document.getElementById('smoke')?.classList.remove('hide');
+    }
+});
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+package controller;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+/**
+ * Servlet implementation class Suasanphamproductquantri
+ */
+@MultipartConfig
+@WebServlet("/Suasanphamproductquantri")
+public class Suasanphamproductquantri extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static final String IMAGE_DIRECTORY = "C:\\";
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public Suasanphamproductquantri() {
+        super();
+    }
+
+    /**
+     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("productquantri.jsp");
+        rd.forward(request, response);
+    }
+
+    /**
+     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Part part = request.getPart("image"); // Lấy file từ form
+
+        // Đảm bảo thư mục lưu ảnh tồn tại
+        String uploadDir = IMAGE_DIRECTORY;  // Hoặc thay bằng thư mục bạn chọn trong ứng dụng
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs(); // Tạo thư mục nếu chưa tồn tại
+        }
+
+        // Lấy tên file
+        String filename = Path.of(part.getSubmittedFileName()).getFileName().toString();
+
+        // Lưu file vào thư mục chỉ định
+        part.write(uploadDir + "/" + filename);
+
+        // Chuyển hướng hoặc làm gì đó sau khi upload thành công
+        doGet(request, response);
+    }
+}
