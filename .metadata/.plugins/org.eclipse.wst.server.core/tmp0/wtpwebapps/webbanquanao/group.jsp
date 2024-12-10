@@ -78,7 +78,7 @@
 
 				<li class="nav-item dropdown pe-3">
 					
-<a class="nav-link nav-profile d-flex align-items-center pe-0"
+			<a class="nav-link nav-profile d-flex align-items-center pe-0"
 					href="#" data-bs-toggle="dropdown"> <i
 						class="bi bi-person-circle"></i> <span
 						<%if(list != null){
@@ -101,16 +101,16 @@
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-
+						
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-person"></i> <span>Đổi
-									mật khẩu</span>
+							href="Thongtincanhan.jsp"> <i class="bi bi-person"></i> <span>Thông tin cá nhân
+									</span>
 						</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="#"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
+							href="Dangxuat"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
 									xuất</span>
 						</a></li>
 
@@ -136,6 +136,9 @@
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="<%=projectName%>/category.jsp"> <i
 					class="bi bi-layout-text-window-reverse"></i> <span>Danh mục</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed" href="<%=projectName%>/Donhangquantri.jsp">
+					<i class="bi bi-cart"></i> <span>Đơn hàng</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="<%=projectName%>/productquantri.jsp"> <i

@@ -42,7 +42,7 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Đăng nhập" class="auth-submit">
-                            <a href="register.html" class="auth-btn-direct">Đăng kí</a>
+                            <a href="register.jsp" class="auth-btn-direct">Đăng kí</a>
                         </div>
                     </form>
                     <div class="auth-forgot-password">

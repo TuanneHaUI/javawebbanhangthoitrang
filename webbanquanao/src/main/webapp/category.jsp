@@ -1,3 +1,7 @@
+<%@page import="model.User"%>
+<%@page import="model.DanhMuc"%>
+<%@page import="java.util.List"%>
+<%@page import="Reponsitory.LaydulieuReponsitory"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +45,11 @@
 </head>
 
 <body>
-
+	<%
+	String projectName = request.getContextPath(); // Lấy tên dự án
+	HttpSession s = request.getSession(false);
+	List<User> listt = (session != null) ? (List<User>) session.getAttribute("Ghinhotaikhoan") : null;
+	%>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -56,45 +64,53 @@
    
 
     <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+			<ul class="d-flex align-items-center">
 
-        <li class="nav-item dropdown pe-3">
+				<li class="nav-item dropdown pe-3">
+					
+			<a class="nav-link nav-profile d-flex align-items-center pe-0"
+					href="#" data-bs-toggle="dropdown"> <i
+						class="bi bi-person-circle"></i> <span
+						<%if(listt != null){
+						for(User u : listt) {%>
+						class="d-none d-md-block dropdown-toggle ps-2"><%=u.getHoTen()%>
+							</span>
+				</a> <!-- End Profile Iamge Icon -->
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-			<i class="bi bi-person-circle" ></i>
-            <span class="d-none d-md-block dropdown-toggle ps-2">Nguyễn Hoàng Tùng</span>
-          </a><!-- End Profile Iamge Icon -->
+					<ul
+						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+						<li class="dropdown-header">
+							<h6><%=u.getTenTaiKhoan()%></h6>
+							<%if(u.getMaQuyen() == 1) {%>
+							<span>Quản trị viên</span>
+							<%} else{%>
+							<span>Khách hàng</span>
+							<%} %>
+						</li>
+						
+						<li>
+							<hr class="dropdown-divider">
+						</li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Tung123</h6>
-              <span>Quản trị viên</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+							<li><a class="dropdown-item d-flex align-items-center"
+							href="Thongtincanhan.jsp"> <i class="bi bi-person"></i> <span>Thông tin cá nhân
+									</span>
+						</a></li>
+						<li>
+							<hr class="dropdown-divider">
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center"
+							href="Dangxuat"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
+									xuất</span>
+						</a></li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>Đổi mật khẩu</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Đăng xuất</span>
-              </a>
-            </li>
+					</ul> <!-- End Profile Dropdown Items -->
+				</li>
+				<%} }%>
+				<!-- End Profile Nav -->
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
-
-      </ul>
-    </nav><!-- End Icons Navigation -->
+			</ul>
+		</nav>
 
   </header><!-- End Header -->
 
@@ -106,13 +122,16 @@
      
 	  <li class="nav-heading">Quản lý bán hàng</li>
 	  <li class="nav-item">
-        <a class="nav-link " href="Category.html">
+        <a class="nav-link " href=<%=projectName%>/category.jsp">
           <i class="bi bi-layout-text-window-reverse"></i>
           <span>Danh mục</span>
         </a>
       </li>
+      <li class="nav-item"><a class="nav-link collapsed" href="<%=projectName%>/Donhangquantri.jsp">
+					<i class="bi bi-cart"></i> <span>Đơn hàng</span>
+			</a></li>
 	  <li class="nav-item">
-        <a class="nav-link collapsed" href="productquantri.html">
+        <a class="nav-link collapsed" href="<%=projectName%>/productquantri.jsp">
           <i class="bi bi-grid"></i>
           <span>Sản phẩm</span>
         </a>
@@ -121,14 +140,14 @@
       <li class="nav-heading">Quản lý tài khoản</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="account.html">
+        <a class="nav-link collapsed" href="<%=projectName%>/account.jsp">
           <i class="bi bi-person"></i>
-          <span>tài khoản</span>
+          <span>Tài khoản</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="group.html">
+        <a class="nav-link collapsed" href="<%=projectName%>/group.jsp">
           <i class="bi bi-question-circle"></i>
           <span>Phân quyền</span>
         </a>
@@ -168,10 +187,10 @@
               <h5 class="card-title">Thêm danh mục phân loại</h5>
 
               <!-- Vertical Form -->
-              <form >
+              <form action="Themdanhmuc" method="post">
                 <div class="col-12">
                   <label for="inputName" class="form-label">Tên danh mục</label>
-                  <input type="text" class="form-control" id="inputName">
+                  <input type="text" class="form-control" id="inputName" name="addThemSanPham">
                 </div>
                 
                 <div class="text-center">
@@ -195,54 +214,40 @@
                   </tr>
                 </thead>
                 <tbody>
+                <%
+                LaydulieuReponsitory lg = new LaydulieuReponsitory();
+                List<DanhMuc> l = lg.SelectDanhMuc();
+                for(DanhMuc danhmuc : l){
+                		  %>
                   <tr>
-					<td>01</td>
-                    <td>Quần áo nam</td>                    
-                    <td class="small-column">6</td>
+					<td><%= danhmuc.getMaDanhmuc() %></td>
+                    <td><%=danhmuc.getTenDanhMuc() %></td>                    
+                    <td class="small-column"><%=danhmuc.getSoluong()%></td>
                     <td>
-					<form>
-					<button id="editB" type="button" class="btn btn-outline-warning">Sửa</button>
-					<button class="btn btn-outline-danger">xoá</button>
-					<button id="detailB" type="button" class="btn btn-outline-info">Chi tiết</button>
+                    <div class="d-flex justify-content-center mb-1">
+                    <form>
+					<button id="editB" type="button" class="btn btn-outline-warning" data-id="<%=danhmuc.getMaDanhmuc()%>" onclick="editForm(this)">Sửa</button>
+					</form>
+					<form action="Xoadanhmuc" method="get">
+					<input type="hidden" value=<%=danhmuc.getMaDanhmuc()%> name="id">
+					<button class="btn btn-outline-danger" type="submit">Xoá</button>
+					</form>
+                    </div>
+					<%-- <form>
+					<button id="editB" type="button" class="btn btn-outline-warning" data-id="<%=danhmuc.getMaDanhmuc()%>" onclick="editForm(this)">Sửa</button>
+					</form>
+					<form action="Xoadanhmuc" method="get">
+					<input type="hidden" value=<%=danhmuc.getMaDanhmuc()%> name="id">
+					<button class="btn btn-outline-danger" type="submit">Xoá</button>
+					</form> --%>
+					<form action="Chitietdanhmuc" method="get">
+					<input type="hidden" value=<%=danhmuc.getMaDanhmuc()%> name="id">
+					<button  type="submit" class="btn btn-outline-info">Chi tiết</button>
 					</form>
 					</td>
                   </tr>
-                  <tr>
-					<td>02</td>
-                    <td>Quần áo nữ</td>                    
-                    <td class="small-column">6</td>
-                    <td>
-					<button type="button" class="btn btn-outline-warning">Sửa</button>
-					<button type="button" class="btn btn-outline-danger">xoá</button>
-					</td>
-                  </tr>
-				  <tr>
-					<td>03</td>
-                    <td>Túi</td>                    
-                    <td class="small-column">6</td>
-                    <td>
-					<button type="button" class="btn btn-outline-warning">Sửa</button>
-					<button type="button" class="btn btn-outline-danger">xoá</button>
-					</td>
-                  </tr>
-				  <tr>
-					<td>04</td>
-                    <td>Giày</td>                    
-                    <td class="small-column">6</td>
-                    <td>
-					<button type="button" class="btn btn-outline-warning">Sửa</button>
-					<button type="button" class="btn btn-outline-danger">xoá</button>
-					</td>
-                  </tr>
-				  <tr>
-					<td>05</td>
-                    <td>Đồng hồ</td>                    
-                    <td class="small-column">6</td>
-                    <td>
-					<button type="button" class="btn btn-outline-warning">Sửa</button>
-					<button type="button" class="btn btn-outline-danger">xoá</button>
-					</td>
-                  </tr>
+                  <%} %>
+                  
 				  
                 </tbody>
               </table>
@@ -259,10 +264,11 @@
               <h5 class="card-title">Sửa danh mục</h5>
 
               <!-- Vertical Form -->
-              <form >
+              <form action="UpdateDanhMuc" method="post">
+              <input type="hidden" id="product-id" name="product-id" readonly>
                 <div class="col-12">
                   <label for="inputName" class="form-label">Tên danh mục mới</label>
-                  <input type="text" class="form-control" id="inputName">
+                  <input type="text" class="form-control" id="inputName" name="updateDanhMuc">
                 </div>
                 
                 <div class="text-center">
@@ -360,16 +366,25 @@
 		}
 	}
 
-	document.getElementById('editB').addEventListener('click', () => {editForm();});
-	function editForm() {
-		const editF = document.getElementById('editF');
-		const smoke = document.getElementById('smoke');
-		
-		if (editF.classList.contains('hide')) {
-			editF.classList.remove('hide');
-			smoke.classList.remove('hide');
-		}
-	}
+/*  document.getElementById('editB').addEventListener('click', () => {editForm();}); */
+function editForm(button) {
+    const editF = document.getElementById('editF');
+    const smoke = document.getElementById('smoke');
+    const productIdInput = document.getElementById('product-id'); // Input để lưu id sản phẩm
+    const productId = button.getAttribute('data-id'); // Lấy data-id từ button
+
+    // Nếu tồn tại input product-id, cập nhật giá trị id vào input đó
+    if (productIdInput) {
+        productIdInput.value = productId; // Gán id vào input
+    }
+
+    // Hiển thị form chỉnh sửa
+    if (editF.classList.contains('hide')) {
+        editF.classList.remove('hide');
+        smoke.classList.remove('hide');
+    }
+}
+
 	document.getElementById('detailB').addEventListener('click', () => {detailForm();});
 	function detailForm() {
 		const detailF = document.getElementById('detailF');

@@ -3,20 +3,21 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="true"/>
 	<list key="searchhistory">
-		<item value="sửa sản phẩm"/>
+		<item value="xem nhanh"/>
+		<item value=".main"/>
+		<item value="datatable-container"/>
+		<item value="main"/>
+		<item value=".section"/>
+		<item value="section"/>
+		<item value="pagetitle"/>
+		<item value="update"/>
 		<item value="sửa"/>
-		<item value="sửa "/>
-		<item value="editForm"/>
-		<item value="sửa t"/>
-		<item value="editCategory"/>
-		<item value="sửa sản p"/>
-		<item value="editF"/>
-		<item value="mã sản phẩm là"/>
-		<item value=".size"/>
-		<item value="showEditForm("/>
-		<item value="smoke"/>
-		<item value="assets"/>
-		<item value="catory"/>
+		<item value="data-id"/>
+		<item value="thêm"/>
+		<item value="DOMContentLoaded"/>
+		<item value="xoahet"/>
+		<item value="xoachi"/>
+		<item value="chitietsanpham"/>
 	</list>
 	<list key="replacehistory">
 		<item value="assetsquantri"/>

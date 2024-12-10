@@ -57,6 +57,8 @@
 <body>
 	<%
 	String projectName = request.getContextPath(); // Lấy tên dự án
+	HttpSession s = request.getSession(false);
+	List<User> listt = (session != null) ? (List<User>) session.getAttribute("Ghinhotaikhoan") : null;
 	%>
 
 	<!-- ======= Header ======= -->
@@ -72,55 +74,50 @@
 
 
 
-		<nav class="header-nav ms-auto">
+	<nav class="header-nav ms-auto">
 			<ul class="d-flex align-items-center">
 
-				<li class="nav-item dropdown pe-3"><a
-					class="nav-link nav-profile d-flex align-items-center pe-0"
+				<li class="nav-item dropdown pe-3">
+					
+			<a class="nav-link nav-profile d-flex align-items-center pe-0"
 					href="#" data-bs-toggle="dropdown"> <i
 						class="bi bi-person-circle"></i> <span
-						class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+						<%if(listt != null){
+						for(User u : listt) {%>
+						class="d-none d-md-block dropdown-toggle ps-2"><%=u.getHoTen()%>
+							</span>
 				</a> <!-- End Profile Iamge Icon -->
 
 					<ul
 						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 						<li class="dropdown-header">
-							<h6>Kevin Anderson</h6> <span>Web Designer</span>
+							<h6><%=u.getTenTaiKhoan()%></h6>
+							<%if(u.getMaQuyen() == 1) {%>
+							<span>Quản trị viên</span>
+							<%} else{%>
+							<span>Khách hàng</span>
+							<%} %>
 						</li>
+						
 						<li>
 							<hr class="dropdown-divider">
 						</li>
 
-						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-person"></i> <span>My
-									Profile</span>
+							<li><a class="dropdown-item d-flex align-items-center"
+							href="Thongtincanhan.jsp"> <i class="bi bi-person"></i> <span>Thông tin cá nhân
+									</span>
 						</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
-
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-gear"></i> <span>Account
-									Settings</span>
-						</a></li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li><a class="dropdown-item d-flex align-items-center"
-							href="pages-faq.html"> <i class="bi bi-question-circle"></i>
-								<span>Need Help?</span>
-						</a></li>
-						<li>
-							<hr class="dropdown-divider">
-						</li>
-
-						<li><a class="dropdown-item d-flex align-items-center"
-							href="#"> <i class="bi bi-box-arrow-right"></i> <span>Sign
-									Out</span>
+							href="Dangxuat"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
+									xuất</span>
 						</a></li>
 
-					</ul> <!-- End Profile Dropdown Items --></li>
+					</ul> <!-- End Profile Dropdown Items -->
+				</li>
+				<%} }%>
 				<!-- End Profile Nav -->
 
 			</ul>
@@ -140,6 +137,9 @@
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="<%=projectName%>/category.jsp"> <i
 					class="bi bi-layout-text-window-reverse"></i> <span>Danh mục</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed" href="<%=projectName%>/Donhangquantri.jsp">
+					<i class="bi bi-cart"></i> <span>Đơn hàng</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="<%=projectName%>/productquantri.jsp"> <i
@@ -188,7 +188,7 @@
 					<div class="card">
 
 						<!-- Table with stripped rows -->
-						<table class="table datatable">
+						<table class="table datatable col-lg-8" >
 							<thead>
 								<tr>
 									<th>ID</th>
@@ -214,7 +214,7 @@
 								<tr>
 									<td><%=l.getMaTaiKhoan()%></td>
 									<td><%=l.getTenTaiKhoan()%></td>
-									<td><%=l.getMatKhau()%></td>
+									<td><%=l.getMatKhau().substring(0, 10)%></td>
 									<td><%=l.getHoTen()%></td>
 									<td><%=l.getEmail()%></td>
 									<td><%=l.getDiaChi()%></td>

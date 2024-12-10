@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@page import="model.ChiTietSanPham"%>
 <%@page import="model.DanhMuc"%>
 <%@page import="model.SanPham"%>
@@ -96,8 +97,10 @@
 </head>
 
 <body>
-	<%
+		<%
 	String projectName = request.getContextPath(); // Lấy tên dự án
+	HttpSession s = request.getSession(false);
+	List<User> listt = (session != null) ? (List<User>) session.getAttribute("Ghinhotaikhoan") : null;
 	%>
 	<!-- ======= Header ======= -->
 	<header id="header" class="header fixed-top d-flex align-items-center">
@@ -116,36 +119,47 @@
 		<nav class="header-nav ms-auto">
 			<ul class="d-flex align-items-center">
 
-				<li class="nav-item dropdown pe-3"><a
-					class="nav-link nav-profile d-flex align-items-center pe-0"
+				<li class="nav-item dropdown pe-3">
+					
+			<a class="nav-link nav-profile d-flex align-items-center pe-0"
 					href="#" data-bs-toggle="dropdown"> <i
 						class="bi bi-person-circle"></i> <span
-						class="d-none d-md-block dropdown-toggle ps-2">Nguyễn Hoàng
-							Tùng</span>
+						<%if(listt != null){
+						for(User u : listt) {%>
+						class="d-none d-md-block dropdown-toggle ps-2"><%=u.getHoTen()%>
+							</span>
 				</a> <!-- End Profile Iamge Icon -->
 
 					<ul
 						class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
 						<li class="dropdown-header">
-							<h6>Tung123</h6> <span>Quản trị viên</span>
+							<h6><%=u.getTenTaiKhoan()%></h6>
+							<%if(u.getMaQuyen() == 1) {%>
+							<span>Quản trị viên</span>
+							<%} else{%>
+							<span>Khách hàng</span>
+							<%} %>
 						</li>
+						
 						<li>
 							<hr class="dropdown-divider">
 						</li>
 
-						<li><a class="dropdown-item d-flex align-items-center"
-							href="users-profile.html"> <i class="bi bi-person"></i> <span>Đổi
-									mật khẩu</span>
+							<li><a class="dropdown-item d-flex align-items-center"
+							href="Thongtincanhan.jsp"> <i class="bi bi-person"></i> <span>Thông tin cá nhân
+									</span>
 						</a></li>
 						<li>
 							<hr class="dropdown-divider">
 						</li>
 						<li><a class="dropdown-item d-flex align-items-center"
-							href="#"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
+							href="Dangxuat"> <i class="bi bi-box-arrow-right"></i> <span>Đăng
 									xuất</span>
 						</a></li>
 
-					</ul> <!-- End Profile Dropdown Items --></li>
+					</ul> <!-- End Profile Dropdown Items -->
+				</li>
+				<%} }%>
 				<!-- End Profile Nav -->
 
 			</ul>
@@ -166,6 +180,9 @@
 			<li class="nav-item"><a class="nav-link collapsed"
 				href="<%=projectName%>/category.jsp"> <i
 					class="bi bi-layout-text-window-reverse"></i> <span>Danh mục</span>
+			</a></li>
+			<li class="nav-item"><a class="nav-link collapsed" href="<%=projectName%>/Donhangquantri.jsp">
+					<i class="bi bi-cart"></i> <span>Đơn hàng</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link "
 				href="<%=projectName%>/productquantri.jsp"> <i
@@ -232,89 +249,43 @@
 									<h5 class="card-title">Thêm sản phẩm</h5>
 
 									<!-- Vertical Form -->
-									<form>
+									<form action="Themsanphamproductquantri" method="post"
+										enctype="multipart/form-data">
 										<div class="col-12">
 											<label for="inputName" class="form-label">Tên sản
 												phẩm</label> <input type="text" class="form-control" id="inputName"
-												placeholder="Tên sản phẩm"> <label
+												placeholder="Tên sản phẩm" name="addTensanpham"> <label
 												for="categorySelect" class="form-label">Chọn danh
 												mục của sản phẩm</label> <select class="form-select"
-												id="categorySelect">
+												id="categorySelect" name="addDanhmucsanpham">
 												<option selected>Chọn danh mục...</option>
-												<option value="1">Quần áo nam</option>
-												<option value="2">Quần áo nữ</option>
+												<option value="1">Quần áo Nữ</option>
+												<option value="2">Quần áo Nam</option>
 												<option value="3">Phụ kiện</option>
 												<option value="4">Giày dép</option>
 												<option value="5">Túi xách</option>
 											</select> <label for="inputPrice" class="form-label">Đơn giá</label> <input
 												type="number" class="form-control" id="inputPrice"
-												placeholder="Đơn vị: $">
-											<form id="uploadForm" action="/upload" method="post"
+												placeholder="Đơn vị: $" name="idGiasanpham">
+											<!-- <form id="uploadForm" action="/upload" method="post"
 												enctype="multipart/form-data">
 												<label for="inputImg">Ảnh:</label><br> <input
 													type="file" id="inputImg" name="image" accept="image/*"
-													required>
-											</form>
-											<br> <label for="inputDetail" class="form-label">Mô
-												tả</label> <input class="form-control" id="inputDetail"
-												placeholder="Mô tả sản phẩm"> <label
-												class="form-label">Kiểu dáng:</label>
-
-											<div class="card-body">
-
-
-												<!-- Table with hoverable rows -->
-												<table class="table table-hover" id="recordsTable">
-													<thead>
-														<tr>
-															<th scope="col">#</th>
-															<th scope="col">Màu sắc</th>
-															<th scope="col">Kích cỡ</th>
-															<th scope="col">Số lượng</th>
-
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<td>Chưa có kiểu dáng nào được thêm</td>
-														</tr>
-													</tbody>
-												</table>
-												<button type="button" id="adds" class="btn btn-success">+</button>
-												<label class="form-label">thêm Kiểu dáng:</label>
-												<form id="inputForm">
-													<div class="card">
-														<div class="card-body row hide" id="addstyle">
-															<label for="inputColor" class="form-label">Màu
-																sắc</label> <input type="text" class="form-control"
-																id="inputColor" placeholder="Nhập màu sắc"> <label
-																for="inputSize" class="form-label">Kích cỡ</label> <select
-																class="form-select" id="inputSize">
-																<option selected>Chọn kích cỡ...</option>
-																<option value="S">S</option>
-																<option value="M">M</option>
-																<option value="L">L</option>
-																<option value="XL">XL</option>
-																<option value="XXL">XXL</option>
-																<option value="3XL">3XL</option>
-															</select> <label for="inputQuantity" class="form-label">Số
-																lượng</label> <input type="number" class="form-control"
-																id="inputQuantity" placeholder="Nhập số lượng">
-
-															<div class="text-center">
-																<button type="button" id="submitButton"
-																	class="btn btn-primary">Thêm kiểu</button>
-															</div>
-														</div>
-													</div>
-												</form>
-
-											</div>
+													required>f
+											</form> -->
+											<label for="inputImg">Ảnh:</label><br> <input
+												type="file" id="inputImg" name="image" accept="image/*"
+												required> <br> <label for="inputDetail"
+												class="form-label">Mô tả</label> <input class="form-control"
+												id="inputDetail" placeholder="Mô tả sản phẩm" name="addMota">
 
 
-											<div class="text-center">
-												<button type="submit" class="btn btn-primary">Thêm</button>
-											</div>
+										</div>
+
+
+										<div class="text-center">
+											<button type="submit" class="btn btn-primary">Thêm</button>
+										</div>
 									</form>
 									<!-- Vertical Form -->
 								</div>
@@ -349,7 +320,8 @@
 								<td><%=sp.getMaSanpham()%></td>
 								<td><%=sp.getTenSanPham()%></td>
 								<td><img src="<%=sp.getDuongDanAnh()%>"
-									alt="Esprit Ruffle Shirt" style="width: 100px; height: auto;"></td>
+									alt="<%=sp.getTenSanPham()%>"
+									style="width: 100px; height: auto;" loading="lazy"></td>
 								<%
 								// Tính tổng số lượng cho sản phẩm này
 								for (ChiTietSanPham c : chitiet) {
@@ -373,23 +345,25 @@
 
 								<td><%=sp.getGia()%></td>
 								<td>
-									<form>
-										<%-- <button type="button" class="btn btn-outline-warning"
-											id="editB" data-id="<%=sp.getMaSanpham()%>"
-											onclick="editForm()">Sửa</button> --%>
+									<div class="d-flex justify-content-center mt-2">
+										<!-- Sửa Button -->
 										<button type="button" class="btn btn-outline-warning"
 											data-id="<%=sp.getMaSanpham()%>" onclick="editForm(this)">Sửa</button>
 
-										<form action="Xoasanphamproductquantri" method="get">
-											<input type="hidden" value=<%=sp.getMaSanpham()%> name="id">
+										<!-- Xoá Button -->
+										<form action="Xoasanphamproductqt" method="post" class="ml-3">
+											<input type="hidden" value="<%=sp.getMaSanpham()%>" name="id">
 											<button class="btn btn-outline-danger" type="submit">Xoá</button>
 										</form>
+									</div> <!-- Chi tiết Button on a new line -->
+									<div class="mt-1">
 										<form action="LayidSanPhamquantri" method="post">
-											<input type="hidden" value=<%=sp.getMaSanpham()%> name="idd">
+											<input type="hidden" value="<%=sp.getMaSanpham()%>"
+												name="idd">
 											<button type="submit" class="btn btn-outline-info"
-												id="detailB" style="margin-top: 4px;">Chi tiết</button>
+												id="detailB">Chi tiết</button>
 										</form>
-									</form>
+									</div>
 
 
 								</td>
@@ -463,11 +437,11 @@
 						mục của sản phẩm</label> <select class="form-select" id="editCategory"
 						name="category">
 						<option selected>Chọn danh mục...</option>
-						<option value="1">Quần áo nam</option>
-						<option value="2">Quần áo nữ</option>
-						<option value="3">Phụ kiện</option>
-						<option value="4">Giày dép</option>
-						<option value="5">Túi xách</option>
+						<option value="1">Nữ</option>
+						<option value="2">Nam</option>
+						<option value="3">Túi</option>
+						<option value="4">Giày</option>
+						<option value="5">Đồng hồ</option>
 					</select>
 
 					<!-- Đơn giá -->
@@ -600,55 +574,55 @@
 	<!-- Template Main JS File -->
 	<script src="assetsquantri/js/main.js"></script>
 	<script>
-document.getElementById('addb').addEventListener('click', toggleUpload);
-function toggleUpload() {
-    const addForm = document.getElementById('addf');
-    addForm.classList.toggle('hide');
-}
+	document.getElementById('addb').addEventListener('click', toggleUpload);
+	function toggleUpload() {
+	    const addForm = document.getElementById('addf');
+	    addForm.classList.toggle('hide');
+	}
 
-document.getElementById('adds').addEventListener('click', styleUpload);
-function styleUpload() {
-    const addStyle = document.getElementById('addstyle');
-    addStyle.classList.toggle('hide');
-}
+	document.getElementById('adds').addEventListener('click', styleUpload);
+	function styleUpload() {
+	    const addStyle = document.getElementById('addstyle');
+	    addStyle.classList.toggle('hide');
+	}
 
-const form = document.getElementById('inputForm');
-const submitButton = document.getElementById('submitButton');
-const tableBody = document.querySelector('#recordsTable tbody');
+	const form = document.getElementById('inputForm');
+	const submitButton = document.getElementById('submitButton');
+	const tableBody = document.querySelector('#recordsTable tbody');
 
-let records = [];
-const updateTable = () => {
-    tableBody.innerHTML = "";
-    if (records.length === 0) {
-        tableBody.innerHTML = `<tr><td>Chưa có kiểu dáng nào được thêm</td></tr>`;
-        return;
-    }
-    records.forEach((record, index) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${index + 1}</td>
-            <td>${record.color}</td>
-            <td>${record.size}</td>
-            <td>${record.quantity}</td>
-        `;
-        tableBody.appendChild(row);
-    });
-};
+	let records = [];
+	const updateTable = () => {
+	    tableBody.innerHTML = "";
+	    if (records.length === 0) {
+	        tableBody.innerHTML = `<tr><td>Chưa có kiểu dáng nào được thêm</td></tr>`;
+	        return;
+	    }
+	    records.forEach((record, index) => {
+	        const row = document.createElement('tr');
+	        row.innerHTML = `
+	            <td>${index + 1}</td>
+	            <td>${record.color}</td>
+	            <td>${record.size}</td>
+	            <td>${record.quantity}</td>
+	        `;
+	        tableBody.appendChild(row);
+	    });
+	};
 
-submitButton.addEventListener('click', () => {
-    const color = document.getElementById('inputColor').value.trim();
-    const size = document.getElementById('inputSize').value.trim();
-    const quantity = document.getElementById('inputQuantity').value.trim();
+	submitButton.addEventListener('click', () => {
+	    const color = document.getElementById('inputColor').value.trim();
+	    const size = document.getElementById('inputSize').value.trim();
+	    const quantity = document.getElementById('inputQuantity').value.trim();
 
-    if (!color || !size || !quantity) {
-        alert("hãy nhập đầy đủ các mục");
-        return;
-    }
+	    if (!color || !size || !quantity) {
+	        alert("hãy nhập đầy đủ các mục");
+	        return;
+	    }
 
-    records.push({ color, size, quantity });
-    updateTable();
-    form.reset();
-});
+	    records.push({ color, size, quantity });
+	    updateTable();
+	    form.reset();
+	});
 
 
 /* function editForm() {

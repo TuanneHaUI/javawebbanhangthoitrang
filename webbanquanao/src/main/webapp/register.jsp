@@ -36,7 +36,7 @@
                         </label>
                         <div class="footer-action">
                             <input type="submit" value="Đăng ký" class="auth-submit">
-                            <a href="login.html" class="auth-btn-direct">Đăng nhập</a>
+                            <a href="login.jsp" class="auth-btn-direct">Đăng nhập</a>
                         </div>
                     </form>
                 </div>

@@ -1,7 +1,7 @@
 package model;
 
 public class DanhMuc {
-private int maDanhmuc;
+private int maDanhmuc, soluong;
 private String tenDanhMuc;
 public DanhMuc() {
 	super();
@@ -22,6 +22,12 @@ public String getTenDanhMuc() {
 }
 public void setTenDanhMuc(String tenDanhMuc) {
 	this.tenDanhMuc = tenDanhMuc;
+}
+public int getSoluong() {
+	return soluong;
+}
+public void setSoluong(int soluong) {
+	this.soluong = soluong;
 }
 
 }

@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Mahoa;
 import service.LoginService;
 
 import java.io.IOException;
@@ -22,6 +23,7 @@ public class Dangki extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 private LoginService lg = new LoginService();
 private LaydulieuReponsitory dk = new LaydulieuReponsitory();
+private Mahoa mh = new Mahoa();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -99,16 +101,17 @@ private LaydulieuReponsitory dk = new LaydulieuReponsitory();
 //			request.getRequestDispatcher("/register.jsp").forward(request, response);
 //			return;
 //		}
-
+		String mahoa = mh.hashPassword(matKhau1);
+		
 		// Kiểm tra tài khoản đã tồn tại
-		boolean kiemTra = lg.LoginSoSanh(tenTaiKhoan, matKhau1);
+		boolean kiemTra = lg.LoginSoSanh(tenTaiKhoan, mahoa);
 		if (kiemTra) {
 			tontai = "Tài khoản đã tồn tại";
-			request.setAttribute("tontai", tontai);System.out.println("đã vào đến noiw dăng kí tốnf tain");
+			request.setAttribute("tontai", tontai);System.out.println("đã vào đến noiw dăng kí tồn tại");
 			request.getRequestDispatcher("/register.jsp").forward(request, response);
 		
 		} else {
-			boolean Dangki = dk.Dangki(tenTaiKhoan, matKhau1, email, hoTen, soDienThoai, diaChi);
+			boolean Dangki = dk.Dangki(tenTaiKhoan, mahoa, email, hoTen, soDienThoai, diaChi);
 			System.out.println("đã vào đến noiw dăng kí thành công"+Dangki);
 		    if (Dangki) {
 		    	System.out.println("đã vào đến noiw dăng kí thành công111");

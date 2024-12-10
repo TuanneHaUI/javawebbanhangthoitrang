@@ -23,7 +23,7 @@ public class ConnectionSql {
             for (int i = 0; i < poolSize; i++) {
                 availableConnections.add(createConnection());
             }
-            System.out.println("Pool kết nối đã khởi tạo thành công với " + poolSize + " kết nối.");
+//            System.out.println("Pool kết nối đã khởi tạo thành công với " + poolSize + " kết nối.");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             throw new SQLException("Không tìm thấy Driver", e);
@@ -65,7 +65,7 @@ public class ConnectionSql {
             connection = createConnection();
         }
         usedConnections.add(connection);
-        System.out.println("Lấy kết nối. Số lượng kết nối khả dụng: " + availableConnections.size());
+//        System.out.println("Lấy kết nối. Số lượng kết nối khả dụng: " + availableConnections.size());
         return connection;
     }
 
@@ -80,7 +80,7 @@ public class ConnectionSql {
                 availableConnections.add(connection);
             }
             notifyAll(); // Thông báo các thread đang chờ
-            System.out.println("Trả kết nối. Số lượng kết nối khả dụng: " + availableConnections.size());
+//            System.out.println("Trả kết nối. Số lượng kết nối khả dụng: " + availableConnections.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }

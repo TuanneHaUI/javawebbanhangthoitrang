@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Servlet implementation class Xoasanphamproductquantri
  */
-@WebServlet("/Xoasanphamproductquantri")
+@WebServlet("/Xoasanphamproductqt")
 public class Xoasanphamproductquantri extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       private LoginService lg = new LoginService();

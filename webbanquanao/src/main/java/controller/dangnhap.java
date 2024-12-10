@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.Mahoa;
 import model.User;
 import service.LoginService;
 
@@ -25,6 +26,7 @@ public class dangnhap extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        private LoginService l = new LoginService();
        private LaydulieuReponsitory ldl = new LaydulieuReponsitory();
+       private Mahoa mh = new Mahoa();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,16 +41,17 @@ public class dangnhap extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tdn = request.getParameter("tenDangNhap").trim();
 		String mk = request.getParameter("matKhau").trim();
-		boolean m = l.LoginSoSanh(tdn, mk);
+		String mkMaHoa = mh.hashPassword(mk);
+		boolean m = l.LoginSoSanh(tdn, mkMaHoa);
 		
 		String url ="";
 		if(m) {
-			int maQuyen = l.getUserRole(tdn,mk);
+			int maQuyen = l.getUserRole(tdn,mkMaHoa);
 			HttpSession session = request.getSession();
-			List<User> l = ldl.getUser(tdn, mk);
+			List<User> l = ldl.getUser(tdn, mkMaHoa);
 			session.setAttribute("Ghinhotaikhoan", l);
 			if(maQuyen == 1 ) {
-				url = "/group.jsp";
+				url = "/category.jsp";
 			}
 //				response.getWriter().append("chuc mung ban dang nhap thanh cong");
 			if(maQuyen == -1) {

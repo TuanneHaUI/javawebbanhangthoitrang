@@ -40,4 +40,15 @@ public interface Thaotac {
 	public boolean suaChiTietProductQuanTri(int id, int soLuong);
 	public int xoaHetChiTietSanPham(int id);
 	public int xoaSanPhamID(int id);
+	public boolean updateSanPham(int id, String name, int danhMuc, float gia, String anh, String moTa);
+	public boolean addChiTietSP(int id, String mau, String kichCo, int SoLuong);
+	public boolean addSanPham(String tenSaPham, int idDanhMuc, float giaSP, String moTa, String duongDanAnh);
+	public List<DanhMuc> SelectDanhMuc();
+	public boolean deleteDanhMucID(int id);
+	public boolean deleteSPIdDanhMuc(int id);
+	public boolean deleteChiSPIdDanhMuc(int id);
+	public boolean addThemDanhMuc(String tenDanhMuc);
+	public boolean updateDanhMuc(int idDanhMuc, String tenDanhMuc);
+	public boolean soSanhEmailandMK(String email, String matKhau);
+	public boolean updateUser(String email, String matKhau);
 }
