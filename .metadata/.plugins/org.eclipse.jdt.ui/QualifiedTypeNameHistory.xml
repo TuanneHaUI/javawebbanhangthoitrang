@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="jakarta.servlet.http.HttpServlet"/>
-    <fullyQualifiedTypeName name="model.User"/>
-    <fullyQualifiedTypeName name="model.ChiTietSanPham"/>
     <fullyQualifiedTypeName name="service.LoginService"/>
     <fullyQualifiedTypeName name="java.awt.Image"/>
     <fullyQualifiedTypeName name="jakarta.servlet.annotation.MultipartConfig"/>
@@ -11,13 +9,29 @@
     <fullyQualifiedTypeName name="java.io.File"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="java.nio.file.Path"/>
-    <fullyQualifiedTypeName name="java.lang.Float"/>
-    <fullyQualifiedTypeName name="model.DanhMuc"/>
-    <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="model.Mahoa"/>
     <fullyQualifiedTypeName name="controller.Laydulieutrangchu"/>
-    <fullyQualifiedTypeName name="Reponsitory.LaydulieuReponsitory"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="model.SanPham"/>
+    <fullyQualifiedTypeName name="model.DanhMuc"/>
+    <fullyQualifiedTypeName name="Reponsitory.Thaotacvoigiaodiennguoidung"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="model.KhuyenMai"/>
+    <fullyQualifiedTypeName name="java.lang.Float"/>
+    <fullyQualifiedTypeName name="int"/>
     <fullyQualifiedTypeName name="jakarta.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.Session"/>
+    <fullyQualifiedTypeName name="model.User"/>
+    <fullyQualifiedTypeName name="model.ChiTietSanPham"/>
+    <fullyQualifiedTypeName name="controller.Giohang"/>
+    <fullyQualifiedTypeName name="model.GioHang"/>
+    <fullyQualifiedTypeName name="com.google.gson.Gson"/>
+    <fullyQualifiedTypeName name="controller.Laydulieusanpham"/>
+    <fullyQualifiedTypeName name="Reponsitory.LaydulieuReponsitory"/>
+    <fullyQualifiedTypeName name="model.SanPham"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="controller.Donhang"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="model.DonHang"/>
+    <fullyQualifiedTypeName name="Reponsitory.Laydulieuchonguoidung"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
 </qualifiedTypeNameHistroy>

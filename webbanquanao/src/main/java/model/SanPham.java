@@ -2,7 +2,7 @@ package model;
 
 public class SanPham {
 	private int maSanpham, soLuong, maDanhMuc;
-	private String tenSanPham, moTa, duongDanAnh;
+	private String tenSanPham, moTa, duongDanAnh, maKhuyeMai;
 	private float gia;
 	public SanPham(int maSanpham, int maDanhMuc, String tenSanPham, String moTa, String duongDanAnh,
 			float gia) {
@@ -59,6 +59,12 @@ public class SanPham {
 	}
 	public void setGia(float gia) {
 		this.gia = gia;
+	}
+	public String getMaKhuyeMai() {
+		return maKhuyeMai;
+	}
+	public void setMaKhuyeMai(String maKhuyeMai) {
+		this.maKhuyeMai = maKhuyeMai;
 	}
 	
 	

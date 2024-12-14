@@ -42,6 +42,7 @@ public class LaydulieuReponsitory implements Thaotac {
 			// Xử lý kết quả trả về
 			while (rs.next()) {
 				User us = new User();
+				us.setMaTaiKhoan(rs.getInt("MaNguoiDung"));
 				us.setTenTaiKhoan(rs.getString("TenDangNhap"));
 				us.setMatKhau(rs.getString("MatKhau"));
 				us.setHoTen(rs.getString("HoTen"));
@@ -1341,5 +1342,60 @@ public class LaydulieuReponsitory implements Thaotac {
 		}
 	}
 		return ktra;
+	}
+
+	@Override
+	public List<SanPham> Laythongtinsanphamtheodanhmuc() {
+		List<SanPham> list = new ArrayList<>();
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    ConnectionSql connectionSql = null;
+	    try {
+	        // Tạo đối tượng ConnectionSql để lấy kết nối
+	        connectionSql = new ConnectionSql();
+	        conn = connectionSql.getConnection(); // Lấy kết nối từ pool
+
+	        // Câu truy vấn SQL để lấy số lượng sản phẩm theo danh mục
+	        String query = "SELECT MaDanhMuc, COUNT(*) AS SoLuong FROM sanpham GROUP BY MaDanhMuc";
+
+	        // Chuẩn bị câu lệnh SQL
+	        ps = conn.prepareStatement(query);
+
+	        // Thực thi câu lệnh SQL
+	        rs = ps.executeQuery();
+
+	        // Xử lý kết quả trả về
+	        while (rs.next()) {
+	            // Lưu thông tin vào một đối tượng SanPham hoặc một đối tượng khác nếu cần thiết
+	            SanPham sp = new SanPham();
+	            sp.setMaDanhMuc(rs.getInt("MaDanhMuc"));
+	            sp.setSoLuong(rs.getInt("SoLuong"));
+	            System.out.println("mã danh muc là: "+rs.getInt("MaDanhMuc"));
+	            System.out.println("Sô lượng là: "+ rs.getInt("SoLuong"));
+	            list.add(sp);
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Lỗi trong phần lấy số lượng theo mã sản phẩm");
+	        e.printStackTrace();
+	    } finally {
+	        // Đảm bảo tài nguyên được đóng đúng cách và trả kết nối vào pool
+	        try {
+	            if (rs != null) {
+	                rs.close();
+	            }
+	            if (ps != null) {
+	                ps.close();
+	            }
+	            // Trả kết nối lại vào pool
+	            if (conn != null) {
+	                connectionSql.releaseConnection(conn); // Trả kết nối về pool
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return list;
 	}
 }

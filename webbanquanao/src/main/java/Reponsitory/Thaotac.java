@@ -51,4 +51,5 @@ public interface Thaotac {
 	public boolean updateDanhMuc(int idDanhMuc, String tenDanhMuc);
 	public boolean soSanhEmailandMK(String email, String matKhau);
 	public boolean updateUser(String email, String matKhau);
+	public List<SanPham> Laythongtinsanphamtheodanhmuc();
 }

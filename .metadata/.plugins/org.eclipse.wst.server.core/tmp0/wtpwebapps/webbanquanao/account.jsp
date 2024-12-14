@@ -52,6 +52,38 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    /* Đảm bảo bảng có thể cuộn ngang */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    /* Giảm kích thước font chữ trên màn hình nhỏ */
+    @media (max-width: 768px) {
+        .table th, .table td {
+            font-size: 12px; /* Giảm kích thước font */
+            white-space: nowrap; /* Giữ nội dung trên một dòng */
+        }
+
+        /* Ẩn các cột ít quan trọng */
+        .table th:nth-child(3), .table td:nth-child(3), /* Mật khẩu */
+        .table th:nth-child(6), .table td:nth-child(6), /* Địa chỉ */
+        .table th:nth-child(7), .table td:nth-child(7)  /* Số điện thoại */ {
+            display: none;
+        }
+    }
+
+    /* Chỉnh nút hành động cho điện thoại */
+    @media (max-width: 576px) {
+        .table th, .table td {
+            font-size: 10px;
+        }
+        .btn {
+            font-size: 10px;
+            padding: 3px 6px;
+        }
+    }
+</style>
 </head>
 
 <body>
@@ -188,116 +220,107 @@
 					<div class="card">
 
 						<!-- Table with stripped rows -->
-						<table class="table datatable col-lg-8" >
-							<thead>
-								<tr>
-									<th>ID</th>
-									<th>Tên tài khoản</th>
-									<th>Mật khẩu</th>
-									<th>Họ tên</th>
-									<th>Email</th>
-									<th>Địa chỉ</th>
-									<th>Số điện thoại</th>
-									<th>Quyền</th>
-									<th>Trạng thái</th>
-									<th>Hành động</th>
-								</tr>
-							</thead>
-							<tbody>
-								<%
-								String loiSuaQuyen = request.getAttribute("Loisuaquyen") != null ? request.getAttribute("Loisuaquyen").toString() : "";
-								LaydulieuReponsitory lg = new LaydulieuReponsitory();
-								List<User> list = lg.Laythongtinnguoidung();
-								List<Quyen> q = lg.Laythongtin();
-								for (User l : list) {
-								%>
-								<tr>
-									<td><%=l.getMaTaiKhoan()%></td>
-									<td><%=l.getTenTaiKhoan()%></td>
-									<td><%=l.getMatKhau().substring(0, 10)%></td>
-									<td><%=l.getHoTen()%></td>
-									<td><%=l.getEmail()%></td>
-									<td><%=l.getDiaChi()%></td>
-									<td><%=l.getSoDienThoai()%></td>
-									<%
-									for (Quyen quyen : q) {
-										if (l.getMaQuyen() == quyen.getMaQuyen()) {
-									%>
-									<td><%=quyen.getTenQuyen()%></td>
-									<%
-									}
-									}
-									%>
-									<td><%=l.getTrangThai()%></td>
-									<div class="card-body row hide" id="editForm">
-										<h5 class="card-title">Sửa tài khoản</h5>
-										<!-- Vertical Form -->
-										<form action="suaTaiKhoanAdmin" method="POST">
-											<input type="hidden" name="id" id="editId">
-											<div class="col-12">
-												<!--<label for="editName" class="form-label">Mã tài
-													khoản người dùng</label> --> <input type="hidden" class="form-control"
-													id="editName" name="idMaTaiKhoan" required>
-											</div>
-											<div class="col-12">
-												<label class="form-label">Chọn quyền</label>
-												<div>
-													<input type="radio" id="adminRole" name="idQuyenMuonSua"
-														value="1" required> <label for="adminRole">Admin</label>
-												</div>
-												<div>
-													<input type="radio" id="KhachRole" name="idQuyenMuonSua"
-														value="3" required> <label for="KhachRole">Khách hàng</label>
-												</div>
-											</div>
-											<div class="col-12">
-												<label class="form-label">Trạng thái</label>
-												<div>
-													<input type="radio" id="trangThaiTrueRole" name="idTrangThaiMuonSua"
-														value="True" required> <label for="trangThaiTrueRole">True</label>
-												</div>
-												<div>
-													<input type="radio" id="idTrangThaiFlaseMuonSua" name="idTrangThaiMuonSua"
-														value="Flase" required> <label for="idTrangThaiFlaseMuonSua">Flase</label>
-												</div>
-											</div>
-											<p class="text-danger"><%=loiSuaQuyen%></p>
-											<div class="size-204 respon6-next">
-												<div class="text-center mt-3">
-													<button type="submit" class="btn btn-primary">Lưu</button>
-													<button type="button" class="btn btn-secondary"
-														onclick="toggleEditForm()">Hủy</button>
-												</div>
-											</div>
-										</form>
+					<div class="table-responsive">
+    <table class="table datatable col-lg-8">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Quyền</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            String loiSuaQuyen = request.getAttribute("Loisuaquyen") != null ? request.getAttribute("Loisuaquyen").toString() : "";
+            LaydulieuReponsitory lg = new LaydulieuReponsitory();
+            List<User> list = lg.Laythongtinnguoidung();
+            List<Quyen> q = lg.Laythongtin();
+            for (User l : list) {
+            %>
+            <tr>
+                <td><%=l.getMaTaiKhoan()%></td>
+                <td><%=l.getTenTaiKhoan()%></td>
+                <td><%=l.getMatKhau().substring(0, 10)%></td>
+                <td><%=l.getHoTen()%></td>
+                <td><%=l.getEmail()%></td>
+                <td><%=l.getDiaChi()%></td>
+                <td><%=l.getSoDienThoai()%></td>
+                <% 
+                for (Quyen quyen : q) {
+                    if (l.getMaQuyen() == quyen.getMaQuyen()) {
+                %>
+                <td><%=quyen.getTenQuyen()%></td>
+                <% 
+                    }
+                }
+                %>
+                <td><%=l.getTrangThai()%></td>
+                <div class="card-body row hide" id="editForm">
+                    <h5 class="card-title">Sửa tài khoản</h5>
+                    <!-- Vertical Form -->
+                    <form action="suaTaiKhoanAdmin" method="POST">
+                        <input type="hidden" name="id" id="editId">
+                        <div class="col-12">
+                            <input type="hidden" class="form-control" id="editName" name="idMaTaiKhoan" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Chọn quyền</label>
+                            <div>
+                                <input type="radio" id="adminRole" name="idQuyenMuonSua" value="1" required>
+                                <label for="adminRole">Admin</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="KhachRole" name="idQuyenMuonSua" value="3" required>
+                                <label for="KhachRole">Khách hàng</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Trạng thái</label>
+                            <div>
+                                <input type="radio" id="trangThaiTrueRole" name="idTrangThaiMuonSua" value="True" required>
+                                <label for="trangThaiTrueRole">True</label>
+                            </div>
+                            <div>
+                                <input type="radio" id="idTrangThaiFlaseMuonSua" name="idTrangThaiMuonSua" value="Flase" required>
+                                <label for="idTrangThaiFlaseMuonSua">Flase</label>
+                            </div>
+                        </div>
+                        <p class="text-danger"><%=loiSuaQuyen%></p>
+                        <div class="size-204 respon6-next">
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="button" class="btn btn-secondary" onclick="toggleEditForm()">Hủy</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Vertical Form -->
+                </div>
+                <td>
+                    <div class="d-flex justify-content-center align-items-center">
+                        <form action="suaTaiKhoanAdmin" method="POST">
+                            <input type="hidden" name="idMaTaiKhoan" value="<%=l.getMaTaiKhoan()%>">
+                            <button type="button" class="btn btn-outline-warning" onclick="showEditForm('<%=l.getMaTaiKhoan()%>', '<%=l.getMaTaiKhoan()%>')">Sửa</button>
+                        </form>
 
-										<!-- Vertical Form -->
-									</div>
-
-									<td>
-										<div class="d-flex justify-content-center align-items-center">
-											<form action="suaTaiKhoanAdmin" method="POST">
-												<input type="hidden" name="idMaTaiKhoan"
-													value="<%=l.getMaTaiKhoan()%>">
-												<button type="button" class="btn btn-outline-warning"
-													onclick="showEditForm('<%=l.getMaTaiKhoan()%>', '<%=l.getMaTaiKhoan()%>')">Sửa</button>
-											</form>
-
-
-											<form action="xoaIdNguoiDungAccount" method="GET">
-												<input type="hidden" name="id"
-													value="<%=l.getMaTaiKhoan()%>">
-												<button type="submit" class="btn btn-outline-danger bt2-">xoá</button>
-											</form>
-										</div>
-								</tr>
-								<%
-								}
-								%>
-
-
-							</tbody>
-						</table>
+                        <form action="xoaIdNguoiDungAccount" method="GET">
+                            <input type="hidden" name="id" value="<%=l.getMaTaiKhoan()%>">
+                            <button type="submit" class="btn btn-outline-danger bt2-">xoá</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+					
 						<!-- End Table with stripped rows -->
 
 					</div>

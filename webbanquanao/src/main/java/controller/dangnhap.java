@@ -27,17 +27,11 @@ public class dangnhap extends HttpServlet {
        private LoginService l = new LoginService();
        private LaydulieuReponsitory ldl = new LaydulieuReponsitory();
        private Mahoa mh = new Mahoa();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public dangnhap() {
         super();
         // TODO Auto-generated constructor stub
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tdn = request.getParameter("tenDangNhap").trim();
 		String mk = request.getParameter("matKhau").trim();
@@ -55,7 +49,7 @@ public class dangnhap extends HttpServlet {
 			}
 //				response.getWriter().append("chuc mung ban dang nhap thanh cong");
 			if(maQuyen == -1) {
-			 url = "/index.html";
+			 url = "/Laydulieusanpham";
 				
 
 			}
@@ -67,9 +61,8 @@ public class dangnhap extends HttpServlet {
 		rs.forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -29,7 +29,7 @@
                         </div>
                         <p class="auth-sgt">or sign in with:</p>
                     </div>
-                    <form class="login-form" action="dang-nhap">
+                    <form class="login-form" action="dang-nhap" method="post">
                         <input type="text" class="auth-form-input" placeholder="Tên đăng nhập" name="tenDangNhap">
                         <div class="input-icon">
                             <input type="password" class="auth-form-input" placeholder="Mật khẩu" name="matKhau">
