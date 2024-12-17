@@ -3,6 +3,7 @@
 	<item key="hasShownOverlayPopupBefore" value="true"/>
 	<item key="replaceBarOpen" value="false"/>
 	<list key="searchhistory">
+		<item value="id"/>
 		<item value="sửa"/>
 		<item value="sửa sản phẩm"/>
 		<item value="sửa sản phẩn"/>
@@ -17,7 +18,6 @@
 		<item value="Giỏ hàng"/>
 		<item value=".button-group"/>
 		<item value="thêm vào giỏ hàng"/>
-		<item value="js-name-detail"/>
 	</list>
 	<list key="replacehistory">
 		<item value="assetsquantri"/>

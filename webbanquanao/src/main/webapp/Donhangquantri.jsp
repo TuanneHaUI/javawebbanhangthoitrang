@@ -185,6 +185,7 @@
 									<option value="Đang giao đến bạn">Đang giao đến bạn</option>
 									<option value="Tạm dừng">Tạm dừng</option>
 									<option value="Đang chuẩn bị hàng">Đang chuẩn bị hàng</option>
+									<option value="Hoàn thành">Hoàn thành</option>
 								</select>
 								<button type="submit" class="btn btn-primary" name="Luu" value="Luu">Lưu 
 									</button>
