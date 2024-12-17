@@ -1,5 +1,0 @@
-INDEX VERSION 1.134
-D:\webjava\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\611823605.index
-\webbanquanao\src\main\java
-D:\webjava\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\486937441.index
-\webbanquanao\src\main\java
