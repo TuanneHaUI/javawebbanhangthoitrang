@@ -29,7 +29,7 @@ public class LaydulieuReponsitory implements Thaotac {
 			conn = connectionSql.getConnection(); // Lấy kết nối từ pool
 
 			// Câu truy vấn SQL
-			String query = "SELECT * FROM NguoiDung WHERE TenDangNhap = ? AND MatKhau = ? and trangThai = ?";
+			String query = "SELECT * FROM nguoidung WHERE TenDangNhap = ? AND MatKhau = ? and trangThai = ?";
 
 			// Chuẩn bị câu lệnh SQL
 			ps = conn.prepareStatement(query);

@@ -1,15 +1,13 @@
 <%@page import="model.User"%>
 <%@page import="model.GioHang"%>
-<%@page import="Reponsitory.Laydulieuchonguoidung"%>
-<%@page import="model.DanhMuc"%>
-<%@page import="model.SanPham"%>
 <%@page import="java.util.List"%>
+<%@page import="Reponsitory.Laydulieuchonguoidung"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Cửa hàng</title>
+	<title>Giới thiệu</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -131,11 +129,11 @@
 								 
 							</li>
 
-							<li class="active-menu">
+							<li >
 								<a href="Cuahang">Cửa hàng</a>
 							</li>
 
-							<li class="label1" data-label1="hot">
+							<li  class="label1" data-label1="hot">
 								<a href="Giohang">Giỏ hàng</a>
 							</li>
 
@@ -143,8 +141,8 @@
 								<a href="blog.html">Blog</a>
 							</li>
 
-							<li>
-								<a href="about.html">Giới thiệu</a>
+							<li class="active-menu">
+								<a href="about.jsp">Giới thiệu</a>
 							</li>
 
 							<li>
@@ -160,31 +158,28 @@
 						</div>
 
 						<div
-						<%
-						Laydulieuchonguoidung lgn = new Laydulieuchonguoidung();
-							List<GioHang> gh = lgn.LayHetThongTinGioHang();
-							HttpSession tk = request.getSession(false);
-							List<User> user = (List<User>) tk.getAttribute("Ghinhotaikhoan");
-							
-								int soluong = 0;
-								float tongTien = 0;
-								if(user != null){
-								for(GioHang gioHang:gh){
-									for(User u : user)
-										if(u.getMaTaiKhoan()==gioHang.getMaNguoiDung()){
-									soluong += gioHang.getSoLuong();
-									tongTien += gioHang.getGia();
-										}
-								}
-							}
-							
-							
-						%>
+							<%Laydulieuchonguoidung lgn = new Laydulieuchonguoidung();
+List<GioHang> gh = lgn.LayHetThongTinGioHang();
+HttpSession tk = request.getSession(false);
+List<User> user = (List<User>) tk.getAttribute("Ghinhotaikhoan");
+int soluong = 0;
+float tongTien = 0;
+if (user != null) {
+	for (GioHang gioHang : gh) {
+		for (User u : user)
+			if (u.getMaTaiKhoan() == gioHang.getMaNguoiDung()) {
+				soluong += gioHang.getSoLuong();
+				tongTien += gioHang.getGia();
+			}
+	}
+
+}%>
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 							data-notify="<%=soluong%>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
-						
+
+
 						<div class="icon-header-dropdown">
 							<a href="#"
 								class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
@@ -284,7 +279,7 @@
 				</li>
 
 				<li>
-					<a href="">Blog</a>
+					<a href="blog.html">Blog</a>
 				</li>
 
 				<li>
@@ -315,7 +310,7 @@
 	</header>
 
 	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart" >
+	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -323,36 +318,42 @@
 				<span class="mtext-103 cl2"> Giỏ hàng </span>
 
 				<div
-					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart" >
+					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
 
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-				<%
-				if(user != null){
-				for(GioHang giohang : gh){
-					for(User u : user){
-					if(u.getMaTaiKhoan()==giohang.getMaNguoiDung()){	
-					
-				%>
+					<%
+					if (user != null) {
+						for (GioHang giohang : gh) {
+							for (User u : user) {
+						if (u.getMaTaiKhoan() == giohang.getMaNguoiDung()) {
+					%>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="<%=giohang.getDuongDan() %>" alt="IMG">
+							<img src="<%=giohang.getDuongDan()%>" alt="IMG">
 						</div>
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat </a> <span class="header-cart-item-info"> <%=giohang.getSoLuong() %>
-								x $<%=giohang.getGia() %> </span>
+								White Shirt Pleat </a> <span class="header-cart-item-info"> <%=giohang.getSoLuong()%>
+								x $<%=giohang.getGia()%>
+							</span>
 						</div>
 					</li>
-					<%}} }}%>
-					
+					<%
+					}
+					}
+					}
+					}
+					%>
+
 				</ul>
 
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">Tổng tiền: $<%=tongTien %></div>
+					<div class="header-cart-total w-full p-tb-40">
+						Tổng tiền: $<%=tongTien%></div>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="Giohang"
@@ -366,306 +367,103 @@
 		</div>
 	</div>
 
-	
-	<!-- Product -->
-	<div class="bg0 m-t-23 p-b-140">
+
+
+	<!-- Title page -->
+	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-01.jpg');">
+		<h2 class="ltext-105 cl0 txt-center">
+			Về chúng tôi
+		</h2>
+	</section>	
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-75 p-b-120">
 		<div class="container">
-			<div class="flex-w flex-sb-m p-b-52">
-					<%
-					List<DanhMuc> listDanhMuc = (List<DanhMuc>) request.getAttribute("listDanhMuc");
-					%>
- 					<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						Tất cả
-					</button>
-					<%for(DanhMuc d : listDanhMuc){ %>
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<%=d.getTenDanhMuc()%>">
-						<%=d.getTenDanhMuc()%>
-					</button>
-					<%} %>
-				</div>
+			<div class="row p-b-148">
+				<div class="col-md-7 col-lg-8">
+					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
+						<h3 class="mtext-111 cl2 p-b-16">
+							Our Story
+						</h3>
 
-				<div class="flex-w flex-c-m m-tb-10">
-					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						 Lọc
-					</div>
+						<p class="stext-113 cl6 p-b-26">
+							Website bán hàng thời trang - Chọn lựa hoàn hảo cho phong cách của bạn
 
-					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Tìm kiếm
-					</div>
-				</div>
-				
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-				<form action="TImkiemsanphamtrongcuahang" method="post">
-				<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-						
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="timKiem" placeholder="Search">
-					</div>	
-				
-				</form>
+Website bán hàng thời trang là nơi cung cấp các sản phẩm thời trang đa dạng, từ quần áo, giày dép, túi xách đến phụ kiện, phục vụ nhu cầu làm đẹp và khẳng định phong cách cá nhân của người tiêu dùng. Với giao diện bắt mắt, dễ dàng điều hướng, website này giúp khách hàng tìm kiếm và mua sắm một cách nhanh chóng và tiện lợi.
+
+Trang chủ của website thường được thiết kế hiện đại, với các banner quảng cáo, bộ sưu tập theo mùa hoặc những sản phẩm mới ra mắt. Mỗi sản phẩm được mô tả chi tiết, bao gồm hình ảnh chất lượng cao, thông tin về chất liệu, màu sắc, và các hướng dẫn về cách kết hợp trang phục. Bên cạnh đó, chức năng lọc sản phẩm theo nhiều tiêu chí như size, màu sắc, giá cả giúp người dùng dễ dàng tìm thấy món đồ phù hợp.
+
+Một trong những điểm nổi bật của website bán hàng thời trang chính là khả năng cập nhật các xu hướng thời trang mới nhất. Các bộ sưu tập được phân chia rõ ràng theo các mùa trong năm, từ xuân hè đến thu đông, giúp khách hàng luôn bắt kịp xu hướng.
+
+Chế độ thanh toán linh hoạt, bao gồm thanh toán qua thẻ tín dụng, chuyển khoản ngân hàng hoặc thu tiền khi giao hàng (COD) tạo sự thuận tiện tối đa cho người mua. Chế độ đổi trả hàng cũng là một yếu tố quan trọng, giúp khách hàng yên tâm khi quyết định mua sắm trực tuyến.
+
+Bằng việc cung cấp dịch vụ chăm sóc khách hàng tận tâm, từ hỗ trợ trực tuyến đến tư vấn qua điện thoại, website bán hàng thời trang không chỉ là nơi mua sắm mà còn là người bạn đồng hành đáng tin cậy trong việc tạo dựng phong cách thời trang riêng biệt.
+						</p>
+
 					
+					</div>
 				</div>
 
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
-						<div class="filter-col1 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Sắp xếp theo
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Mặc định
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Sự phổ biến
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Đánh giá trung bình
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Sự mới mẻ
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Giá: Thấp đến Cao
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										Giá: Cao đến Thấp
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col2 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Giá
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Tất cả
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$0.00 - $50.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$50.00 - $100.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$100.00 - $150.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$150.00 - $200.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$200.00+
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col3 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Màu
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Đen
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Xanh
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Xám
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Xanh lá
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Đỏ
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-										<i class="zmdi zmdi-circle-o"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Trắng
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="filter-col4 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Tags
-							</div>
-
-							<div class="flex-w p-t-4 m-r--5">
-								<a href="#"
-									class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
-								</a>
-
-								<a href="#"
-									class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
-
-								<a href="#"
-									class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
-								</a>
-
-								<a href="#"
-									class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
-
-								<a href="#"
-									class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
+				<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
+					<div class="how-bor1 ">
+						<div class="hov-img0">
+							<img src="images/about-01.jpg" alt="IMG">
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="row isotope-grid">
-			<%
-			List<SanPham> list = (List<SanPham>) request.getAttribute("listHome");
 			
-			for(SanPham sp : list){
-				for(DanhMuc d : listDanhMuc){
-					if(sp.getMaDanhMuc()==d.getMaDanhmuc()){
-			%>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <%=d.getTenDanhMuc() %>">
-				<%} } %>
-					<!-- Block2 -->
-					<div class="block2">
-						<div class="block2-pic hov-img0">
-							<img src="<%=sp.getDuongDanAnh() %>" alt="IMG-PRODUCT" style="height: 300px;">
+			<div class="row">
+				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
+					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
+						<h3 class="mtext-111 cl2 p-b-16">
+							Our Mission
+						</h3>
 
-							<a href="Giohangproducttail?id=<%=sp.getMaSanpham() %>"
-								class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 ">
-								Xem nhanh
-							</a>
-						</div>
+						<p class="stext-113 cl6 p-b-26">
+							Website bán hàng thời trang - Trải nghiệm mua sắm tuyệt vời cho mọi khách hàng
 
-						<div class="block2-txt flex-w flex-t p-t-14">
-							<div class="block2-txt-child1 flex-col-l ">
-								<a href="Giohangproducttail?id=<%=sp.getMaSanpham() %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" >
-									<%=sp.getTenSanPham() %>
-								</a>
+Website bán hàng thời trang hiện nay không chỉ đơn giản là một kênh mua sắm trực tuyến, mà còn là nơi thể hiện phong cách cá nhân và cập nhật xu hướng thời trang mới nhất. Với thiết kế tinh tế và thân thiện với người sử dụng, website này mang đến cho khách hàng những trải nghiệm mua sắm trực tuyến đầy tiện lợi và thú vị.
 
-								<span class="stext-105 cl3">
-									<%=sp.getGia() %>
-								</span>
-							</div>
+Trang chủ của website được bố trí khoa học, dễ dàng tìm kiếm các sản phẩm theo các danh mục như áo, quần, giày, túi xách và phụ kiện. Các bộ sưu tập theo mùa được làm nổi bật, giúp khách hàng dễ dàng chọn lựa trang phục phù hợp với thời tiết và phong cách. Mỗi sản phẩm đều có hình ảnh rõ ràng, chi tiết về chất liệu, kích cỡ và thông tin hướng dẫn sử dụng, tạo sự tin tưởng và an tâm cho người mua.
 
-							<div class="block2-txt-child2 flex-r p-t-3">
-								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png"
-										alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l"
-										src="images/icons/icon-heart-02.png" alt="ICON">
-								</a>
-							</div>
+Một tính năng nổi bật của website là khả năng tìm kiếm nhanh chóng với các bộ lọc theo giá, size, màu sắc, và thương hiệu. Khách hàng có thể dễ dàng tìm được những món đồ yêu thích mà không mất nhiều thời gian. Bên cạnh đó, website cũng thường xuyên cập nhật những xu hướng mới, giúp người tiêu dùng luôn bắt kịp với thời trang hiện đại.
+
+Website này còn tích hợp các phương thức thanh toán an toàn và tiện lợi như thẻ tín dụng, thanh toán qua ví điện tử, hoặc trả tiền khi nhận hàng (COD), mang lại sự linh hoạt cho khách hàng trong việc lựa chọn phương thức thanh toán phù hợp. Đặc biệt, dịch vụ giao hàng nhanh chóng và chế độ đổi trả hàng dễ dàng càng làm tăng thêm sự hài lòng cho người mua.
+
+Một yếu tố quan trọng nữa là dịch vụ chăm sóc khách hàng của website, với đội ngũ nhân viên nhiệt tình và chuyên nghiệp luôn sẵn sàng hỗ trợ mọi thắc mắc của khách hàng, từ việc chọn size cho đến tư vấn phối đồ sao cho phù hợp.
+
+Nhìn chung, website bán hàng thời trang không chỉ là một nơi mua sắm mà còn là không gian để khách hàng tìm thấy sự đổi mới, phong cách và sự tự tin qua từng sản phẩm.
+						</p>
+
+						<div class="bor16 p-l-29 p-b-9 m-t-22">
+							<p class="stext-114 cl6 p-r-40 p-b-11">
+								Nhất định tui sẽ được A môn java web
+							</p>
+
+							<span class="stext-111 cl8">
+								- Nguyễn Ngọc Tuấn -
+							</span>
 						</div>
 					</div>
 				</div>
-				<%}%>
-			</div>
 
-			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Xem thêm
-				</a>
+				<div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
+					<div class="how-bor2">
+						<div class="hov-img0">
+							<img src="images/about-02.jpg" alt="IMG">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	</section>	
+	
 		
 
 	<!-- Footer -->
+		<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
 			<div class="row">
@@ -802,7 +600,7 @@
 
 				<p class="stext-107 cl6 txt-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved |Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
 				</p>
@@ -817,11 +615,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
 	</div>
-
-
-
-
-	
 
 <!--===============================================================================================-->	
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -841,70 +634,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		})
 	</script>
 <!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/slick/slick.min.js"></script>
-	<script src="js/slick-custom.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/parallax100/parallax100.js"></script>
-	<script>
-        $('.parallax100').parallax100();
-	</script>
-<!--===============================================================================================-->
 	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-	<script>
-		$('.gallery-lb').each(function() { // the containers for all your galleries
-			$(this).magnificPopup({
-		        delegate: 'a', // the selector for gallery item
-		        type: 'image',
-		        gallery: {
-		        	enabled:true
-		        },
-		        mainClass: 'mfp-fade'
-		    });
-		});
-	</script>
-<!--===============================================================================================-->
-	<script src="vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
-	<script src="vendor/sweetalert/sweetalert.min.js"></script>
-	<script>
-		$('.js-addwish-b2, .js-addwish-detail').on('click', function(e){
-			e.preventDefault();
-		});
-
-		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
-			});
-		});
-
-		$('.js-addwish-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
-
-				$(this).addClass('js-addedwish-detail');
-				$(this).off('click');
-			});
-		});
-
-		/*---------------------------------------------*/
-
-		$('.js-addcart-detail').each(function(){
-			var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-			$(this).on('click', function(){
-				swal(nameProduct, "is added to cart !", "success");
-			});
-		});
-	
-	</script>
 <!--===============================================================================================-->
 	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 	<script>
@@ -924,6 +654,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
-
+	
 </body>
 </html>

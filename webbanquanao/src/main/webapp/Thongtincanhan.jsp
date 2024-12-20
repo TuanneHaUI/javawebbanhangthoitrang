@@ -184,7 +184,9 @@
         <div class="container profile-card">
             <img src="https://via.placeholder.com/180" alt="Avatar" class="avatar">
             <div class="profile-info">
-            <%for(User u : l){ %>
+            <%
+            if(l != null){
+            for(User u : l){ %>
                 <h2><%=u.getHoTen() %></h2>
                 <p><strong>Tuổi:</strong> 20</p>
                 <p><strong>Số điện thoại:</strong> <%=u.getSoDienThoai() %></p>
@@ -194,7 +196,12 @@
                 <p><strong>Quyền:</strong> Quản trị viên</p>
                 <%}else{ %>
                 <p><strong>Quyền:</strong> Khách hàng</p>
-                <%} }%>
+                <%} }}else{%>
+                 <script >
+                alert("Vui lòng đăng nhập để xem thông tin"); // Hiển thị thông báo
+                window.location.href = "login.jsp";
+              </script>
+                <%} %>
                 
                 <a href="https://www.facebook.com/profile.php?id=100056228993711"> <button class="btn">Liên hệ</button></a>
                 <button class="btn" onclick="goBack()">Quay lại</button>

@@ -43,15 +43,10 @@ public class dangnhap extends HttpServlet {
 			int maQuyen = l.getUserRole(tdn,mkMaHoa);
 			HttpSession session = request.getSession();
 			List<User> l = ldl.getUser(tdn, mkMaHoa);
-			for(User s : l) {
-				System.out.println("mã người dùng bên phần đăng nhập là: "+ s.getMaTaiKhoan());
-			}
-			
-			if(l != null) {
+		
 				session.setAttribute("Ghinhotaikhoan", l);
-			}else {
-				session.setAttribute("Ghinhotaikhoan", null);
-			}
+				
+			
 			
 			if(maQuyen == 1 ) {
 				url = "/category.jsp";

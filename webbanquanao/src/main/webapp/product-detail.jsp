@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@page import="model.GioHang"%>
 <%@page import="controller.Donhang"%>
 <%@page import="Reponsitory.Laydulieuchonguoidung"%>
@@ -177,11 +178,18 @@
 						<%
 						Laydulieuchonguoidung lgn = new Laydulieuchonguoidung();
 							List<GioHang> gh = lgn.LayHetThongTinGioHang();
+							HttpSession tk = request.getSession(false);
+							List<User> user = (List<User>) tk.getAttribute("Ghinhotaikhoan");
 							int soluong = 0;
 							float tongTien = 0;
+							if(user != null){
 							for(GioHang gioHang:gh){
+								for(User u : user)
+									if(u.getMaTaiKhoan()==gioHang.getMaNguoiDung()){
 								soluong += gioHang.getSoLuong();
 								tongTien += gioHang.getGia();
+									}
+							}
 							}
 						%>
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
@@ -307,7 +315,11 @@
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
 				<%
+				if(user != null){
 				for(GioHang giohang : gh){
+					for(User u : user){
+					if(u.getMaTaiKhoan()==giohang.getMaNguoiDung()){	
+					
 				%>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
@@ -319,7 +331,7 @@
 								x $<%=giohang.getGia() %> </span>
 						</div>
 					</li>
-					<%} %>
+					<%}} }}%>
 					
 				</ul>
 
@@ -327,9 +339,9 @@
 					<div class="header-cart-total w-full p-tb-40">Tổng tiền: $<%=tongTien %></div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html"
+						<a href="Giohang"
 							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							Xem giỏ hàng </a> <a href="shoping-cart.html"
+							Xem giỏ hàng </a> <a href="Giohang"
 							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Kiểm tra </a>
 					</div>

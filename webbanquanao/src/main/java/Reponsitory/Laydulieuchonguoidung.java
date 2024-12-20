@@ -754,7 +754,7 @@ public class Laydulieuchonguoidung implements Thaotacvoigiaodiennguoidung {
 				ktra = true;
 			}
 		} catch (SQLException e) {
-			System.out.println("Lỗi trong phần lấy dữ liệu cho người dùng thêm đơn hàng");
+			System.out.println("Lỗi trong phần lấy dữ liệu cho người dùng xóa đơn hàng");
 			e.printStackTrace();
 		} finally {
 			// Đảm bảo tài nguyên được đóng đúng cách và trả kết nối vào pool
@@ -945,6 +945,117 @@ public class Laydulieuchonguoidung implements Thaotacvoigiaodiennguoidung {
 		}
 
 		return list;
+	}
+
+	@Override
+	public List<GioHang> IdChiTietSanPham(int MaNguoiDung) {
+		List<GioHang> list = new ArrayList<GioHang>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ConnectionSql connectionSql = null;
+		try {
+			// Tạo đối tượng ConnectionSql để lấy kết nối
+			connectionSql = new ConnectionSql();
+			conn = connectionSql.getConnection(); // Lấy kết nối từ pool
+
+			// Câu truy vấn SQL
+			String query = "SELECT * FROM giohang WHERE MaNguoiDung = ?";
+
+			// Chuẩn bị câu lệnh SQL
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, MaNguoiDung);
+			
+
+			// Thực thi câu lệnh SQL
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				GioHang g = new GioHang();
+				g.setMaChiTietSanPham(rs.getInt("id"));
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			System.out.println("Lỗi trong phần lấy dữ liệu người dùng lấy id người dùng thông qua bảng giỏ hàng");
+			e.printStackTrace();
+		} finally {
+			// Đảm bảo tài nguyên được đóng đúng cách và trả kết nối vào pool
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				// Trả kết nối lại vào pool
+				if (conn != null) {
+					connectionSql.releaseConnection(conn); // Trả kết nối về pool
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<SanPham> TimKiemSanPham(String timKiem) {
+		List<SanPham> listSanPham = new ArrayList<SanPham>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ConnectionSql connectionSql = null;
+		try {
+			// Tạo đối tượng ConnectionSql để lấy kết nối
+			connectionSql = new ConnectionSql();
+			conn = connectionSql.getConnection(); // Lấy kết nối từ pool
+
+			// Câu truy vấn SQL
+			String query = "SELECT * FROM sanpham where TenSanPham like ? ";
+
+			// Chuẩn bị câu lệnh SQL
+			ps = conn.prepareStatement(query);
+
+			ps.setString(1, "%" + timKiem + "%");
+			
+			// Thực thi câu lệnh SQL
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				int masp = rs.getInt("MaSanPham");
+//              int sl = rs.getInt("SoLuong");
+				int madanhmuc = rs.getInt("MaDanhMuc");
+				String tenSp = rs.getString("TenSanPham");
+				String mota = rs.getString("MoTa");
+				String duongdananh = rs.getString("DuongDanAnh");
+				float g = rs.getFloat("Gia");
+				SanPham us = new SanPham(masp, madanhmuc, tenSp, mota, duongdananh, g);
+				listSanPham.add(us);
+			}
+
+		} catch (SQLException e) {
+			System.out.println("Lỗi trong phần lấy dữ liệu cho người dùng phần tìm kiếm sản phẩm");
+			e.printStackTrace();
+		} finally {
+			// Đảm bảo tài nguyên được đóng đúng cách và trả kết nối vào pool
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+				if (ps != null) {
+					ps.close();
+				}
+				// Trả kết nối lại vào pool
+				if (conn != null) {
+
+					connectionSql.releaseConnection(conn); // Trả kết nối về pool
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return listSanPham;
 	}
 
 

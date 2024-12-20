@@ -38,7 +38,8 @@ public class Giohang extends HttpServlet {
 		List<GioHang> gioHang = lgn.LayHetThongTinGioHang();
 		HttpSession s = request.getSession(false);
 		List<User> listUser = (List<User>) s.getAttribute("Ghinhotaikhoan");
-
+		
+		if(listUser != null) {
 		// Tìm những giỏ hàng của khách hàng
 		List<GioHang> gioHangCoIdKhachHang = new ArrayList<GioHang>();
 		System.out.println("giỏ hàng "+ gioHang);
@@ -59,6 +60,9 @@ public class Giohang extends HttpServlet {
 		// Truyền danh sách giỏ hàng đã lọc đến JSP
 		request.setAttribute("gioHang", gioHangCoIdKhachHang);
 		request.getRequestDispatcher("shopping-card.jsp").forward(request, response);
+		}else {
+			response.sendRedirect("login.jsp");
+		}
 	}
 	
 

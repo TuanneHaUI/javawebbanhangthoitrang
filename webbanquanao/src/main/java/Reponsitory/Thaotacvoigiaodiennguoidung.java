@@ -28,4 +28,7 @@ public boolean DeleteDonHang(int idDonHang);
 public boolean updateDonHang(int idDonHang, String trangThai);
 public boolean DeleteSanPhamGioHang(int id);
 public List<SanPham> LayMaGiamGiaoIdUser(int MaNguoiDung);
+public List<GioHang> IdChiTietSanPham(int MaNguoiDung);
+public List<SanPham> TimKiemSanPham(String timKiem);
+
 }

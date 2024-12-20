@@ -78,7 +78,8 @@ public class Giohangsanpham extends HttpServlet {
 		int soLuong = Integer.parseInt(request.getParameter("soLuong"));
 		String gioHang = request.getParameter("gioHang");
 		HttpSession s = request.getSession(false);
-		if(s != null) {
+		List<User> listUser = (List<User>) s.getAttribute("Ghinhotaikhoan");
+		if(listUser != null) {
 			
 			if (datHang != null && datHang.equals("datHang")) {
 				boolean ktra = lgn.CheckSanPhamTonTai(idSanPham, mauSac, kichCo);
@@ -112,7 +113,7 @@ public class Giohangsanpham extends HttpServlet {
 				System.out.println("Kiếm tra phần giỏ hàng: " + ktra);
 				if (ktra) {
 					
-					List<User> listUser = (List<User>) s.getAttribute("Ghinhotaikhoan");
+					
 					int maTaiKhoan = 0;
 					for (User u : listUser) {
 						maTaiKhoan = u.getMaTaiKhoan();

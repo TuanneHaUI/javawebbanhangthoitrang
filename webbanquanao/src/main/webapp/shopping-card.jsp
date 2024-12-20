@@ -1,3 +1,4 @@
+<%@page import="model.User"%>
 <%@page import="Reponsitory.Laydulieuchonguoidung"%>
 <%@page import="model.GioHang"%>
 <%@page import="model.ChiTietSanPham"%>
@@ -68,7 +69,8 @@ body {
 
 .cart-container {
 	width: 80%;
-	margin: 50px auto; background-color : #fff;
+	margin: 50px auto;
+	background-color: #fff;
 	padding: 20px;
 	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
@@ -234,6 +236,42 @@ h2 {
 		font-size: 16px;
 	}
 }
+.icon-header-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none; /* Ẩn menu mặc định */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    z-index: 10;
+    border-radius: 5px;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu ul li {
+    padding: 8px 0;
+}
+
+.dropdown-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.icon-header-dropdown:hover .dropdown-menu {
+    display: block; /* Hiển thị menu khi hover */
+}
 </style>
 </head>
 <body class="animsition">
@@ -291,23 +329,43 @@ h2 {
 						</div>
 
 						<div
-							<%Laydulieuchonguoidung lgn = new Laydulieuchonguoidung();
-List<GioHang> gh = lgn.LayHetThongTinGioHang();
-int soluong = 0;
-float tongTien = 0;
-for (GioHang gioHang : gh) {
-	soluong += gioHang.getSoLuong();
-	tongTien += gioHang.getGia();
-}%>
+						<%
+						Laydulieuchonguoidung lgn = new Laydulieuchonguoidung();
+							List<GioHang> gh = lgn.LayHetThongTinGioHang();
+							HttpSession tk = request.getSession(false);
+							List<User> user = (List<User>) tk.getAttribute("Ghinhotaikhoan");
+							int soluong = 0;
+							float tongTien = 0;
+							if(user != null){
+							for(GioHang gioHang:gh){
+								for(User u : user)
+									if(u.getMaTaiKhoan()==gioHang.getMaNguoiDung()){
+								soluong += gioHang.getSoLuong();
+								tongTien += gioHang.getGia();
+									}
+							}
+							}
+						%>
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
 							data-notify="<%=soluong%>">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
 
-						<a href="#"
-							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
-							data-notify="0"> <i class="zmdi zmdi-favorite-outline"></i>
-						</a>
+						<div class="icon-header-dropdown">
+							<a href="#"
+								class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+								<i class="fa fa-user"></i>
+							</a>
+
+							<!-- Thẻ con chứa thông tin cá nhân và đơn hàng -->
+							<div class="dropdown-menu">
+								<ul>
+									<li><a href="Thongtincanhan.jsp">Thông tin cá nhân</a></li>
+									<li><a href="Thongtindonhangdamua.jsp">Đơn hàng</a></li>
+									<li><a href="Dangxuat">Đăng xuất</a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</nav>
 			</div>
@@ -379,7 +437,7 @@ for (GioHang gioHang : gh) {
 
 				<li><a href="blog.html">Blog</a></li>
 
-				<li><a href="about.html">Giới thiệu</a></li>
+				<li><a href="about.jsp">Giới thiệu</a></li>
 
 				<li><a href="contact.html">Liên hệ</a></li>
 			</ul>
@@ -406,7 +464,7 @@ for (GioHang gioHang : gh) {
 	</header>
 
 	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
+	<div class="wrap-header-cart js-panel-cart" >
 		<div class="s-full js-hide-cart"></div>
 
 		<div class="header-cart flex-col-l p-l-65 p-r-25">
@@ -414,40 +472,41 @@ for (GioHang gioHang : gh) {
 				<span class="mtext-103 cl2"> Giỏ hàng </span>
 
 				<div
-					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart" >
 					<i class="zmdi zmdi-close"></i>
 				</div>
 			</div>
 
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
-					<%
-					for (GioHang giohang : gh) {
-					%>
+				<%
+				if(user != null){
+				for(GioHang giohang : gh){
+					for(User u : user){
+					if(u.getMaTaiKhoan()==giohang.getMaNguoiDung()){	
+					
+				%>
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="<%=giohang.getDuongDan()%>" alt="IMG">
+							<img src="<%=giohang.getDuongDan() %>" alt="IMG">
 						</div>
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<%=giohang.getTenSanPham()%>
-							</a> <span class="header-cart-item-info"> <%=giohang.getSoLuong()%>
-								x $<%=giohang.getGia()%>
-							</span>
+								White Shirt Pleat </a> <span class="header-cart-item-info"> <%=giohang.getSoLuong() %>
+								x $<%=giohang.getGia() %> </span>
 						</div>
 					</li>
-					<%
-					}
-					%>
-
+					<%}} }}%>
+					
 				</ul>
 
 				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Tổng tiền: $<%=tongTien%></div>
+					<div class="header-cart-total w-full p-tb-40">Tổng tiền: $<%=tongTien %></div>
 
 					<div class="header-cart-buttons flex-w w-full">
 						<a href="Giohang"
+							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							Xem giỏ hàng </a> <a href="Giohang"
 							class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
 							Kiểm tra </a>
 					</div>
@@ -509,12 +568,11 @@ for (GioHang gioHang : gh) {
 				<%=tongGia%></p>
 		</div>
 		<form action="ThanhToanGioHang" method="post">
-	
-		<button class="btn-checkout" type="submit">Thanh
-			toán</button>
-		
+
+			<button class="btn-checkout" type="submit">Thanh toán</button>
+
 		</form>
-		
+
 	</div>
 
 

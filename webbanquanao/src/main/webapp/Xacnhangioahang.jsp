@@ -144,8 +144,8 @@
                     <h4><%=g.getTenSanPham()%></h4>
                     <p>Giá: <%=g.getGia() %></p>
                     <p>Số lượng: <%=g.getSoLuong()%></p>
-                    <label for="discount1">Giảm giá:</label>
-                    <input type="text" id="discount1" name="discount1">
+                    <p>Màu sắc: <%=g.getMauSac() %></p>
+                    <p>Số lượng: <%=g.getSoLuong() %></p>
                 </div>
             </div>
             <%} %>
@@ -155,12 +155,12 @@
         <form action="Xacnhangiohang">
          <div class="actions">
          <%
-         for(GioHang g: gioHang){
+         for(User u : user){
          %>
-         <input type="" value="<%=g.getGia()%>" name="gia">
-         <input type="" value="<%=g.getTenSanPham()%>" name="Tensanpham">
-         <input type="text" id="discount1" name="discount1">
-         <%} %>
+         <input value="<%=u.getHoTen()%>" name="hoTen" type="hidden">
+            <input value="<%=u.getSoDienThoai()%>" name="soDienThoai" type="hidden">
+            <input value="<%=u.getDiaChi()%>" name="diaChi" type="hidden">
+            <%} %>
             <button class="btn btn-cancel" name="Huy" value="Huy">Hủy</button>
             <button class="btn btn-confirm" onclick="confirmOrder()" name="Dathang" value="Dathang">Đặt hàng</button>
         </div>
